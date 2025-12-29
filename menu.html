@@ -48,11 +48,18 @@ nav ul {
     gap: 30px;
 }
 
+
 nav ul li a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
     transition: color 0.3s;
+    display: inline-flex;
+  align-items: center;
+  padding: 8px 10px;
+  height: auto;
+  width: 50px;
+  line-height: 1;
 }
 
 nav ul li a:hover {
@@ -61,7 +68,7 @@ nav ul li a:hover {
 
 /* ================= MENU ================= */
 .menu-section {
-    padding: 80px 60px;
+    padding: 60px 50px;
 }
 
 .menu-header {
@@ -136,6 +143,28 @@ nav ul li a:hover {
     gap: 35px;
 }
 
+/* Cart button in navbar */
+.cart-btn{
+    background: transparent;
+    border: 2px solid transparent;
+    padding: 6px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight:700;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+  padding: 8px 10px; /* samakan padding vertikal dengan link */
+  display: inline-flex;
+  align-items: center;
+
+}
+.cart-btn:hover{background: rgba(0,0,0,0.03)}
+.cart-count{
+    background:#ff3b30;color:white;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:800;min-width:20px;text-align:center;
+}
+
 .menu-card {
     background: var(--brown);
     padding: 25px;
@@ -199,10 +228,13 @@ nav ul li a:hover {
 footer {
     background: var(--brown-dark);
     color: white;
-    padding: 30px;
+    padding: 30px 50px;
     text-align: center;
     font-size: 13px;
 }
+
+/* Keep section heights consistent with home.html */
+.site-section { padding: 60px 50px; min-height: 320px }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
@@ -277,6 +309,47 @@ footer {
     border-radius: 10px;
 }
 .btn-view:hover{ background: rgba(78,47,28,0.06) }
+
+/* Mini cart (floating) */
+.mini-cart {
+    position: fixed;
+    right: 22px;
+    top: 140px;
+    width: 320px;
+    max-height: 60vh;
+    background: linear-gradient(180deg,#fffaf2,#ffffff);
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+    overflow: hidden;
+    z-index: 4000;
+    display: none;
+    flex-direction: column;
+    transform-origin: top right;
+}
+.mini-cart.visible { display:flex; animation: popIn .18s ease }
+.mini-cart.visible { display:flex }
+.mini-cart.pop-enter{ animation: popIn .18s ease }
+@keyframes popIn{ from{ transform: translateY(-8px) scale(.98); opacity:0 } to{ transform:none; opacity:1 } }
+.mini-cart-header{
+    padding:12px 14px;
+    background: #ffefcf;
+    border-bottom:1px solid rgba(0,0,0,0.04);
+    font-weight:800;
+    color:var(--brown-dark);
+}
+.mini-cart-items{padding:10px;overflow:auto}
+.mini-cart-item{display:flex;gap:10px;align-items:center;padding:8px 6px;border-radius:8px;margin-bottom:8px}
+.mini-cart-item img{width:56px;height:48px;object-fit:cover;border-radius:8px}
+.mini-cart-item .meta{flex:1}
+.mini-cart-item .meta .name{font-weight:700;color:#3b2a21}
+.mini-cart-item .meta .price{color:var(--brown);font-size:13px}
+.mini-cart-footer{padding:12px;border-top:1px solid rgba(0,0,0,0.04);display:flex;gap:8px;align-items:center}
+.mini-cart-footer .total{flex:1;font-weight:800;color:var(--brown-dark)}
+.mini-cart-footer .mini-btn{background:#4e2f1c;color:#fff;padding:8px 12px;border-radius:8px;border:none;font-weight:700}
+
+@media (max-width: 1024px){
+    .mini-cart{display:none}
+}
 </style>
 </head>
 
@@ -288,8 +361,14 @@ footer {
         <li><a href="home.html">Home</a></li>
         <li><a href="#menu">Menu</a></li>
         <li><a href="#contact">Kontak</a></li>
+        <li>
+            <button id="cart-toggle" class="cart-btn" aria-label="Buka Keranjang">
+                🧺 <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
+            </button>
+        </li>
     </ul>
 </nav>
+
 
 
 
@@ -431,6 +510,16 @@ footer {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 
+    // Update cart count badge
+    function updateCartCount(){
+        const cart = loadCart();
+        const badge = document.getElementById('cart-count');
+        if(!badge) return;
+        const totalItems = cart.reduce((s,i)=>s + (i.quantity||0),0);
+        badge.textContent = totalItems;
+        badge.style.display = totalItems > 0 ? 'inline-block' : 'none';
+    }
+
     // Add to cart
     function addToCart(name, price, image) {
         const cart = loadCart();
@@ -450,6 +539,8 @@ footer {
         }
 
         saveCart(cart);
+        // update mini-cart if present
+        if(typeof renderMiniCart === 'function') renderMiniCart();
         // show centered modal confirmation instead of alert
         const addModal = document.getElementById('add-modal-menu');
         const addMsg = document.getElementById('add-modal-menu-msg');
@@ -491,6 +582,113 @@ footer {
                 if(e.target === addModal) addModal.classList.remove('active');
             });
         }
+    });
+</script>
+
+<!-- Mini Cart (Floating) -->
+<aside id="mini-cart" class="mini-cart" aria-live="polite">
+    <div class="mini-cart-header">Keranjang Anda</div>
+    <div class="mini-cart-items" id="mini-cart-items">
+        <!-- items injected here -->
+    </div>
+    <div class="mini-cart-footer">
+        <div class="total" id="mini-cart-total">Rp. 0</div>
+        <button class="mini-btn" id="mini-cart-view">Lihat Pembelian</button>
+    </div>
+</aside>
+
+<script>
+    // Render mini cart content
+    function renderMiniCart(){
+        const items = loadCart();
+        const container = document.getElementById('mini-cart-items');
+        const totalEl = document.getElementById('mini-cart-total');
+        if(!container || !totalEl) return;
+
+        if(items.length === 0){
+            container.innerHTML = '<div style="padding:12px;color:#666;text-align:center">Belum ada item</div>';
+            totalEl.textContent = 'Rp. 0';
+            return;
+        }
+
+        container.innerHTML = '';
+        let subtotal = 0;
+        items.forEach((it, idx) => {
+            const itemTotal = it.price * it.quantity;
+            subtotal += itemTotal;
+
+            const div = document.createElement('div');
+            div.className = 'mini-cart-item';
+            div.innerHTML = `
+                <img src="${it.image}" alt="${it.name}">
+                <div class="meta">
+                    <div class="name">${it.name}</div>
+                    <div class="price">${new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(it.price)} · x${it.quantity}</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+                    <button style="background:transparent;border:none;color:#c33;cursor:pointer;font-weight:700" onclick="removeMiniItem(${idx})">Hapus</button>
+                    <div style="display:flex;gap:6px;align-items:center">
+                        <button style="background:#eee;border:none;padding:4px 8px;border-radius:6px;cursor:pointer" onclick="updateMiniQty(${idx}, -1)">-</button>
+                        <span style="font-weight:700">${it.quantity}</span>
+                        <button style="background:#eee;border:none;padding:4px 8px;border-radius:6px;cursor:pointer" onclick="updateMiniQty(${idx}, 1)">+</button>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(div);
+        });
+
+        totalEl.textContent = new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(subtotal);
+        // update badge count in navbar
+        if(typeof updateCartCount === 'function') updateCartCount();
+    }
+
+    function updateMiniQty(index, change){
+        const cart = loadCart();
+        if(!cart[index]) return;
+        cart[index].quantity += change;
+        if(cart[index].quantity <= 0) cart.splice(index,1);
+        saveCart(cart);
+        renderMiniCart();
+    }
+
+    function removeMiniItem(index){
+        const cart = loadCart();
+        if(!cart[index]) return;
+        cart.splice(index,1);
+        saveCart(cart);
+        renderMiniCart();
+    }
+
+    // Wire mini cart view button
+    document.addEventListener('DOMContentLoaded', function(){
+        const viewBtn = document.getElementById('mini-cart-view');
+        if(viewBtn){
+            viewBtn.addEventListener('click', ()=> window.location.href = 'transaksi.html');
+        }
+        renderMiniCart();
+
+        // cart toggle in navbar
+        const cartToggle = document.getElementById('cart-toggle');
+        const miniCart = document.getElementById('mini-cart');
+        if(cartToggle && miniCart){
+            cartToggle.addEventListener('click', function(e){
+                e.stopPropagation();
+                miniCart.classList.toggle('visible');
+                // update count when opening
+                if(miniCart.classList.contains('visible')) renderMiniCart();
+            });
+
+            // close when clicking outside
+            document.addEventListener('click', function(evt){
+                if(!miniCart.contains(evt.target) && evt.target !== cartToggle){
+                    miniCart.classList.remove('visible');
+                }
+            });
+        }
+
+        // ensure badge initialized
+        if(typeof updateCartCount === 'function') updateCartCount();
     });
 </script>
 
