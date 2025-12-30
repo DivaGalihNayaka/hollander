@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaksi - Hollander Coffee</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         :root {
             --bg: #f6f1e7;
@@ -334,6 +335,172 @@
         .modal-btn-ok:hover {
             background: #3b2212;
         }
+
+        /* PAYMENT METHOD */
+        .payment-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .payment-section h3 {
+            font-size: 18px;
+            color: var(--brown-dark);
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .payment-option {
+            position: relative;
+        }
+
+        .payment-option input[type="radio"] {
+            display: none;
+        }
+
+        .payment-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            border: 2px solid #e6e0d6;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #555;
+            background: #fafafa;
+        }
+
+        .payment-icon {
+            font-size: 32px;
+        }
+
+        .payment-option input[type="radio"]:checked + .payment-label {
+            border-color: var(--brown-dark);
+            background: #fff8f0;
+            color: var(--brown-dark);
+            box-shadow: 0 4px 12px rgba(78, 47, 28, 0.15);
+        }
+
+        /* SUB-PAYMENT METHODS */
+        .sub-payment-section {
+            display: none;
+            background: #fff8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 1px solid #f6d7b7;
+        }
+
+        .sub-payment-section.active {
+            display: block;
+        }
+
+        .sub-payment-section h4 {
+            font-size: 16px;
+            color: var(--brown-dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .cash-message {
+            background: #e8f5e9;
+            border: 1px solid #81c784;
+            border-radius: 10px;
+            padding: 16px;
+            color: #2e7d32;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .sub-payment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .sub-payment-option {
+            position: relative;
+        }
+
+        .sub-payment-option input[type="radio"] {
+            display: none;
+        }
+
+        .sub-payment-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px;
+            border: 2px solid #e6d5c8;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #555;
+            background: white;
+            font-size: 13px;
+        }
+
+        .sub-payment-icon {
+            font-size: 28px;
+        }
+
+        .sub-payment-option input[type="radio"]:checked + .sub-payment-label {
+            border-color: var(--brown-dark);
+            background: #fff3e0;
+            color: var(--brown-dark);
+            box-shadow: 0 2px 8px rgba(78, 47, 28, 0.1);
+        }
+
+        /* QRIS BARCODE */
+        .qris-barcode-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .qris-barcode-image {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #e6e0d6;
+            border-radius: 8px;
+            padding: 10px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qris-barcode-image img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .qris-barcode-info {
+            text-align: center;
+            color: #555;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
         footer {
         background: var(--brown-dark);
         color: white;
@@ -365,6 +532,144 @@
         <div style="margin-bottom:14px; display:flex; gap:12px; align-items:center;">
             <label for="table-number" style="font-weight:700;color:#4e2f1c;">Nomor meja</label>
             <input id="table-number" type="text" placeholder="Contoh: 17" style="padding:8px;border-radius:6px;border:1px solid #e6e0d6;max-width:160px;">
+        </div>
+
+        <!-- Payment Method Section -->
+        <div class="payment-section">
+            <h3>💳 Pilih Metode Pembayaran</h3>
+            <div class="payment-methods">
+                <div class="payment-option">
+                    <input type="radio" id="payment-cash" name="payment-method" value="cash" checked>
+                    <label for="payment-cash" class="payment-label">
+                        <span class="payment-icon">💵</span>
+                        <span>Tunai</span>
+                    </label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="payment-debit" name="payment-method" value="debit">
+                    <label for="payment-debit" class="payment-label">
+                        <span class="payment-icon">💳</span>
+                        <span>Debit Card</span>
+                    </label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="payment-credit" name="payment-method" value="credit">
+                    <label for="payment-credit" class="payment-label">
+                        <span class="payment-icon">🏧</span>
+                        <span>Credit Card</span>
+                    </label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="payment-qris" name="payment-method" value="qris">
+                    <label for="payment-qris" class="payment-label">
+                        <span class="payment-icon">📱</span>
+                        <span>QRIS</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Sub-payment for Cash -->
+            <div id="sub-cash" class="sub-payment-section active">
+                <div class="cash-message">
+                    💰 Silakan lakukan pembayaran di kasir
+                </div>
+            </div>
+
+            <!-- Sub-payment for Debit Card -->
+            <div id="sub-debit" class="sub-payment-section">
+                <h4>Pilih Dompet Digital:</h4>
+                <div class="sub-payment-options">
+                    <div class="sub-payment-option">
+                        <input type="radio" id="debit-dana" name="debit-method" value="dana">
+                        <label for="debit-dana" class="sub-payment-label">
+                            <img src="https://www.dana.id/favicon.ico" alt="Dana" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>Dana</span>
+                        </label>
+                    </div>
+                    <div class="sub-payment-option">
+                        <input type="radio" id="debit-gopay" name="debit-method" value="gopay" checked>
+                        <label for="debit-gopay" class="sub-payment-label">
+                            <img src="GoPay.jpg" alt="GoPay" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>GoPay</span>
+                        </label>
+                    </div>
+                    <div class="sub-payment-option">
+                        <input type="radio" id="debit-shopeepay" name="debit-method" value="shopeepay">
+                        <label for="debit-shopeepay" class="sub-payment-label">
+                            <img src="ShopeePay.jpg" alt="Shopee Pay" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>Shopee Pay</span>
+                        </label>
+                    </div>
+                    <div class="sub-payment-option">
+                        <input type="radio" id="debit-ovo" name="debit-method" value="ovo">
+                        <label for="debit-ovo" class="sub-payment-label">
+                            <img src="ovo.jpg" alt="OVO" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>OVO</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-payment for Credit Card -->
+            <div id="sub-credit" class="sub-payment-section">
+                <h4>Pilih Bank Kartu Kredit:</h4>
+                <div class="sub-payment-options">
+                    <div class="sub-payment-option">
+                        <input type="radio" id="credit-bsi" name="credit-method" value="bsi" checked>
+                        <label for="credit-bsi" class="sub-payment-label">
+                            <img src="bsi.jpg" alt="BSI" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>BSI</span>
+                        </label>
+                    </div>
+                    <div class="sub-payment-option">
+                        <input type="radio" id="credit-bri" name="credit-method" value="bri">
+                        <label for="credit-bri" class="sub-payment-label">
+                            <img src="BRI.jpg" alt="BRI" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>BRI</span>
+                        </label>
+                    </div>
+                    <div class="sub-payment-option">
+                        <input type="radio" id="credit-bjb" name="credit-method" value="bjb">
+                        <label for="credit-bjb" class="sub-payment-label">
+                            <img src="bjb.jpg" alt="BJB" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>BJB</span>
+                        </label>
+                    </div>
+                    <div class="sub-payment-option">
+                        <input type="radio" id="credit-mandiri" name="credit-method" value="mandiri">
+                        <label for="credit-mandiri" class="sub-payment-label">
+                            <img src="Mandiri.jpg" alt="Mandiri" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>Mandiri</span>
+                        </label>
+                    </div>
+                    <div class="sub-payment-option">
+                        <input type="radio" id="credit-bca" name="credit-method" value="bca">
+                        <label for="credit-bca" class="sub-payment-label">
+                            <img src="BCA.jpg" alt="BCA" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>BCA</span>
+                        </label>
+                    </div>
+                    <div class="sub-payment-option">
+                        <input type="radio" id="credit-permata" name="credit-method" value="permata">
+                        <label for="credit-permata" class="sub-payment-label">
+                            <img src="PermataBank.jpg" alt="Permata" class="sub-payment-icon" style="width:36px;height:36px;">
+                            <span>Permata</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-payment for QRIS -->
+            <div id="sub-qris" class="sub-payment-section">
+                <h4>Scan QRIS Berikut:</h4>
+                <div class="qris-barcode-container">
+                    <div id="qris-canvas" class="qris-barcode-image"></div>
+                    <div class="qris-barcode-info">
+                        <p><strong>Scan dengan aplikasi pembayaran Anda</strong></p>
+                        <p>Pembayaran akan diproses setelah scan QR Code</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="summary" id="summary-section" style="display: none;">
@@ -522,16 +827,60 @@
         const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         const total = subtotal; // no tax
         const tableNumber = (document.getElementById('table-number') || {}).value || '—';
+        
+        // Get selected payment method
+        const paymentMethod = document.querySelector('input[name="payment-method"]:checked');
+        const selectedPayment = paymentMethod ? paymentMethod.value : 'cash';
+        
+        // Get sub-payment method labels
+        const debitLabels = {
+            'dana': 'Dana',
+            'gopay': 'GoPay',
+            'shopeepay': 'Shopee Pay',
+            'ovo': 'OVO'
+        };
+
+        const creditLabels = {
+            'bsi': 'BSI',
+            'bri': 'BRI',
+            'bjb': 'BJB',
+            'mandiri': 'Mandiri',
+            'bca': 'BCA',
+            'permata': 'Permata'
+        };
+
+        // Get payment method label
+        const paymentLabel = {
+            'cash': 'Tunai (Cash)',
+            'debit': 'Debit Card',
+            'credit': 'Credit Card',
+            'qris': 'QRIS'
+        };
+
+        let finalPaymentLabel = paymentLabel[selectedPayment];
+
+        // Add sub-payment method if applicable
+        if (selectedPayment === 'debit') {
+            const debitMethod = document.querySelector('input[name="debit-method"]:checked');
+            const subPayment = debitMethod ? debitMethod.value : 'gopay';
+            finalPaymentLabel += ` - ${debitLabels[subPayment]}`;
+        } else if (selectedPayment === 'credit') {
+            const creditMethod = document.querySelector('input[name="credit-method"]:checked');
+            const subPayment = creditMethod ? creditMethod.value : 'bsi';
+            finalPaymentLabel += ` - ${creditLabels[subPayment]}`;
+        }
 
         // Show modal
         const modal = document.getElementById('checkout-modal');
         const infoDiv = document.getElementById('modal-info');
-        infoDiv.innerHTML = `<strong>Nomor Meja:</strong> ${tableNumber}<br><strong>Total:</strong> ${formatCurrency(total)}`;
+        infoDiv.innerHTML = `<strong>Nomor Meja:</strong> ${tableNumber}<br><strong>Metode Pembayaran:</strong> ${finalPaymentLabel}<br><strong>Total:</strong> ${formatCurrency(total)}`;
         modal.classList.add('active');
 
         // Store data for confirmation
         window.checkoutData = {
             tableNumber: tableNumber,
+            paymentMethod: selectedPayment,
+            paymentLabel: finalPaymentLabel,
             total: total
         };
     }
@@ -548,11 +897,11 @@
         const modal = document.getElementById('checkout-modal');
         modal.classList.remove('active');
 
-        const { tableNumber, total } = window.checkoutData;
+        const { tableNumber, paymentLabel, total } = window.checkoutData;
         
         // Show success modal instead of alert
         const successInfo = document.getElementById('success-info');
-        successInfo.innerHTML = `<strong>Nomor Meja:</strong> ${tableNumber}<br><strong>Total Pesanan:</strong> ${formatCurrency(total)}<br><br><em>Pesanan Anda akan segera disiapkan. Terima kasih!</em>`;
+        successInfo.innerHTML = `<strong>Nomor Meja:</strong> ${tableNumber}<br><strong>Metode Pembayaran:</strong> ${paymentLabel}<br><strong>Total Pesanan:</strong> ${formatCurrency(total)}<br><br><em>Pesanan Anda akan segera disiapkan. Terima kasih!</em>`;
         
         const successModal = document.getElementById('success-modal');
         successModal.classList.add('active');
@@ -577,6 +926,52 @@
         }
     })();
 
+    // Function to generate QR Code for QRIS
+    function generateQRCode() {
+        const container = document.getElementById('qris-canvas');
+        if (!container) return;
+        
+        // Clear previous QR code
+        container.innerHTML = '';
+        
+        // Sample QRIS data (in real usage, this would be actual merchant QRIS string)
+        const qrisData = '00020126360014ID.CO.BCA.QRIS0006000401111231300008A000000000123123302150413100555802ID5913HOLLANDER6009JAKARTA61051234062660118GOPAY6304ABCD';
+        
+        // Generate QR Code
+        new QRCode(container, {
+            text: qrisData,
+            width: 200,
+            height: 200,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    }
+
+    // Function to show/hide sub-payment sections
+    function updatePaymentSubsection(paymentMethod) {
+        // Hide all sub-payment sections
+        document.getElementById('sub-cash').classList.remove('active');
+        document.getElementById('sub-debit').classList.remove('active');
+        document.getElementById('sub-credit').classList.remove('active');
+        const qrisSection = document.getElementById('sub-qris');
+        if (qrisSection) qrisSection.classList.remove('active');
+
+        // Show the appropriate sub-payment section
+        if (paymentMethod === 'cash') {
+            document.getElementById('sub-cash').classList.add('active');
+        } else if (paymentMethod === 'debit') {
+            document.getElementById('sub-debit').classList.add('active');
+        } else if (paymentMethod === 'credit') {
+            document.getElementById('sub-credit').classList.add('active');
+        } else if (paymentMethod === 'qris') {
+            if (qrisSection) {
+                qrisSection.classList.add('active');
+                generateQRCode();
+            }
+        }
+    }
+
     // save table number on change
     document.addEventListener('DOMContentLoaded', function(){
         const input = document.getElementById('table-number');
@@ -585,6 +980,15 @@
                 localStorage.setItem('tableNumber', input.value);
             });
         }
+
+        // Add event listeners to payment method radios
+        const paymentRadios = document.querySelectorAll('input[name="payment-method"]');
+        paymentRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                updatePaymentSubsection(this.value);
+            });
+        });
+
         renderCart();
     });
 </script>
