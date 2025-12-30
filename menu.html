@@ -409,67 +409,89 @@ footer {
                 name: 'Americano',
                 price: 25000,
                 image: 'americano.jpg',
-                category: 'Drink'
+                category: 'Drink',
+                description: 'Kopi espresso yang kuat dan murni, dipadu dengan air panas. Cita rasa yang tajam dan segar.',
+                ingredients: 'Biji Kopi Premium (Arabika), Air Panas, Gula (optional)'
             },
             {
                 name: 'Espresso',
                 price: 20000,
                 image: 'Espresso.jpg',
-                category: 'Drink'
+                category: 'Drink',
+                description: 'Kopi espresso original dengan rasa yang intens dan pekat. Sempurna untuk pecinta kopi sejati.',
+                ingredients: 'Biji Kopi Premium (Arabika), Tekanan Air 9 Bar'
             },
             {
                 name: 'Cappuccino',
                 price: 30000,
                 image: 'cappucino.jpg',
-                category: 'Drink'
+                category: 'Drink',
+                description: 'Kombinasi sempurna espresso, susu uap, dan busa. Creamy dan lezat di setiap tegukan.',
+                ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Busa Susu, Gula (optional), Coklat Bubuk (topping)'
             },
             {
                 name: 'Latte',
                 price: 35000,
                 image: 'Latte.jpg',
-                category: 'Drink'
+                category: 'Drink',
+                description: 'Kopi espresso dengan susu steamed yang melimpah. Smooth dan creamy dengan rasa kopi yang seimbang.',
+                ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Gula (optional), Vanilla Extract (optional)'
             },
             {
                 name: 'Mocha',
                 price: 40000,
                 image: 'macha.jpg',
-                category: 'Drink'
+                category: 'Drink',
+                description: 'Paduan sempurna antara espresso, coklat, dan susu. Manis dan kaya dengan sentuhan mocha klasik.',
+                ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Sirup Coklat, Gula, Whipped Cream (topping)'
             },
             {
                 name: 'Gula Aren',
                 price: 30000,
                 image: 'gulaaren.jpg',
-                category: 'Drink'
+                category: 'Drink',
+                description: 'Kopi dengan pemanis alami gula aren. Rasa tradisional Indonesia dengan manfaat kesehatan.',
+                ingredients: 'Biji Kopi Premium (Robusta), Gula Aren 25gr, Air, Susu Fresh (optional), Cengkeh'
             },
             {
                 name: 'Caramel',
                 price: 30000,
                 image: 'Caramel.jpg',
-                category: 'Drink'
+                category: 'Drink',
+                description: 'Kopi premium dengan sirup karamel yang lezat. Manis dan creamy, perfect untuk afternoon break.',
+                ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Sirup Karamel 15ml, Gula (optional), Whipped Cream (optional)'
             },
             {
                 name: 'Pizza',
                 price: 25000,
                 image: 'Pizza.jpg',
-                category: 'Food'
+                category: 'Food',
+                description: 'Pizza dengan topping pilihan, cheese yang meleleh, dan crust yang renyah. Cocok ditemani minuman favorit.',
+                ingredients: 'Tepung Terigu, Mozzarella Cheese, Tomato Sauce, Daging Sapi Cincang, Paprika, Oregano, Olive Oil'
             },
             {
                 name: 'Burger',
                 price: 45000,
                 image: 'Burger.jpg',
-                category: 'Food'
+                category: 'Food',
+                description: 'Burger premium dengan daging sapi berkualitas, lettuce segar, dan special sauce. Juicy dan menggugah selera.',
+                ingredients: 'Bun Gandum, Daging Sapi Prime 150gr, Lettuce Segar, Tomat, Onion, Pickles, Cheese Cheddar, Special Sauce, Mayonnaise'
             },
             {
                 name: 'Baseball Steak',
                 price: 30000,
                 image: 'Baseball Steak.jpg',
-                category: 'Food'
+                category: 'Food',
+                description: 'Steak tenderloin premium yang empuk. Dimasak sempurna dengan bumbu khas Hollander Coffee.',
+                ingredients: 'Daging Tenderloin 180gr, Garam, Merica Hitam, Butter, Garlic, Rosemary, Thyme'
             },
             {
                 name: 'Pasta',
                 price: 40000,
                 image: 'Spaghetti.jpg',
-                category: 'Food'
+                category: 'Food',
+                description: 'Spaghetti dengan saus pilihan (marinara atau carbonara). Al dente dan creamy, lezat di lidah.',
+                ingredients: 'Spaghetti Premium, Saus Tomato, Basil Segar, Garlic, Olive Oil, Parmesan Cheese, Garam, Merica'
             }
     ];
 
@@ -482,7 +504,7 @@ footer {
 
         menuItems.forEach(item => {
             const card = `
-                <div class="menu-card" onclick="addToCart('${item.name}', ${item.price}, '${item.image}')">
+                <div class="menu-card" onclick="showDescription('${item.name}', ${item.price}, '${item.image}', '${item.description.replace(/'/g, "\\'")}')">
                     <div class="menu-card-title">${item.name}</div>
                     <img src="${item.image}" alt="${item.name}">
                     <div class="menu-card-price">Rp.${item.price.toLocaleString('id-ID')}</div>
@@ -505,6 +527,65 @@ footer {
         return JSON.parse(localStorage.getItem('cart')) || [];
     }
 
+    // Show description modal
+    function showDescription(name, price, image, description) {
+        const modal = document.getElementById('desc-modal');
+        const title = document.getElementById('desc-modal-title');
+        const img = document.getElementById('desc-modal-image');
+        const desc = document.getElementById('desc-modal-description');
+        const priceEl = document.getElementById('desc-modal-price');
+        const addBtn = document.getElementById('desc-modal-add-btn');
+        const ingredientsEl = document.getElementById('desc-modal-ingredients');
+        const tempContainerEl = document.getElementById('desc-modal-temp-container');
+        
+        // Get the item to check if it's a drink
+        const item = menuItems.find(it => it.name === name);
+        
+        if (title) title.textContent = name;
+        if (img) img.src = image;
+        if (img) img.alt = name;
+        if (desc) desc.textContent = description;
+        if (priceEl) priceEl.textContent = 'Rp.' + price.toLocaleString('id-ID');
+        if (ingredientsEl && item) ingredientsEl.textContent = item.ingredients;
+        
+        // Show temperature options only for drinks
+        if (tempContainerEl) {
+            if (item && item.category && item.category.toLowerCase() === 'drink') {
+                tempContainerEl.style.display = 'block';
+                // Reset radio button
+                const coldRadio = document.getElementById('temp-cold');
+                if (coldRadio) coldRadio.checked = true;
+                // Reset custom note field if present
+                const noteEl = document.getElementById('desc-modal-note');
+                if (noteEl) noteEl.value = '';
+            } else {
+                tempContainerEl.style.display = 'none';
+            }
+        }
+
+        // Show size options for certain food items (Burger, Pizza)
+        const sizeContainerEl = document.getElementById('desc-modal-size-container');
+        if (sizeContainerEl) {
+            const showSize = item && item.category && item.category.toLowerCase() === 'food' &&
+                (item.name && (item.name.toLowerCase() === 'burger' || item.name.toLowerCase() === 'pizza'));
+            if (showSize) {
+                sizeContainerEl.style.display = 'block';
+                // Reset size radios
+                const smallRadio = document.getElementById('size-small');
+                if (smallRadio) smallRadio.checked = true;
+                // Reset food note
+                const noteFoodEl = document.getElementById('desc-modal-note-food');
+                if (noteFoodEl) noteFoodEl.value = '';
+            } else {
+                sizeContainerEl.style.display = 'none';
+            }
+        }
+        
+        if (addBtn) addBtn.onclick = function() { addToCart(name, price, image); };
+        
+        if (modal) modal.classList.add('active');
+    }
+
     // Save cart ke localStorage
     function saveCart(cart) {
         localStorage.setItem('cart', JSON.stringify(cart));
@@ -523,10 +604,45 @@ footer {
     // Add to cart
     function addToCart(name, price, image) {
         const cart = loadCart();
-        
-        // Check if item already exists
-        const existingItem = cart.find(item => item.name === name);
-        
+
+        // Get temperature if it's a drink
+        let temperature = '';
+        const tempCold = document.getElementById('temp-cold');
+        const tempNormal = document.getElementById('temp-normal');
+        const tempHot = document.getElementById('temp-hot');
+
+        if (tempCold && tempCold.checked) {
+            temperature = 'Dingin';
+        } else if (tempNormal && tempNormal.checked) {
+            temperature = 'Biasa';
+        } else if (tempHot && tempHot.checked) {
+            temperature = 'Hangat';
+        }
+
+        // Get optional custom request/note from user
+        const noteEl = document.getElementById('desc-modal-note');
+        const noteFoodEl = document.getElementById('desc-modal-note-food');
+        const noteDrink = noteEl ? noteEl.value.trim() : '';
+        const noteFood = noteFoodEl ? noteFoodEl.value.trim() : '';
+        // prefer specific field depending on which is used
+        const note = noteDrink || noteFood || '';
+
+        // Get size if it's a food item (Burger/Pizza)
+        let size = '';
+        const sizeSmall = document.getElementById('size-small');
+        const sizeMedium = document.getElementById('size-medium');
+        const sizeHigh = document.getElementById('size-high');
+        if (sizeSmall && sizeSmall.checked) {
+            size = 'Small';
+        } else if (sizeMedium && sizeMedium.checked) {
+            size = 'Medium';
+        } else if (sizeHigh && sizeHigh.checked) {
+            size = 'High';
+        }
+
+        // Check if item already exists with same temperature, size and same note
+        const existingItem = cart.find(item => item.name === name && (item.temperature || '') === (temperature || '') && (item.size || '') === (size || '') && (item.note || '') === (note || ''));
+
         if (existingItem) {
             existingItem.quantity += 1;
         } else {
@@ -534,6 +650,9 @@ footer {
                 name: name,
                 price: price,
                 image: image,
+                temperature: temperature,
+                size: size,
+                note: note,
                 quantity: 1
             });
         }
@@ -544,13 +663,75 @@ footer {
         // show centered modal confirmation instead of alert
         const addModal = document.getElementById('add-modal-menu');
         const addMsg = document.getElementById('add-modal-menu-msg');
-        if(addMsg) addMsg.textContent = `${name} ditambahkan ke pembelian!`;
+        const descMsg = temperature ? ` (${temperature})` : '';
+        const noteMsg = note ? ` Permintaan: ${note}` : '';
+        if(addMsg) addMsg.textContent = `${name}${descMsg} ditambahkan ke pembelian!${noteMsg}`;
         if(addModal) addModal.classList.add('active');
+
+        // Close description modal
+        const descModal = document.getElementById('desc-modal');
+        if (descModal) descModal.classList.remove('active');
     }
 
     // Render menu on page load
     renderMenu();
 </script>
+
+<!-- Description modal -->
+<div id="desc-modal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="desc-modal-title" style="max-width: 500px;">
+        <img id="desc-modal-image" src="" alt="" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 16px;">
+        <h4 id="desc-modal-title" style="margin-bottom: 8px;">Item Name</h4>
+        <p id="desc-modal-price" style="font-weight: bold; color: var(--brown-dark); margin-bottom: 12px; font-size: 18px;">Rp. 0</p>
+        <p id="desc-modal-description" style="color: #555; margin-bottom: 12px; text-align: left; line-height: 1.6;">Description</p>
+        
+        <div style="background: #f5f5f5; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+            <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px;">Komposisi:</p>
+            <p id="desc-modal-ingredients" style="color: #555; margin: 0; font-size: 13px; line-height: 1.5;">Ingredients</p>
+        </div>
+        
+        <div id="desc-modal-temp-container" style="display: none; background: #fff3e0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #ffe0b2;">
+            <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">Pengaturan Suhu:</p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" id="temp-cold" name="temperature" value="cold" checked>
+                    <span style="color: #555;">Dingin</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" id="temp-normal" name="temperature" value="normal">
+                    <span style="color: #555;">Biasa</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" id="temp-hot" name="temperature" value="hot">
+                    <span style="color: #555;">Hangat</span>
+                </label>
+            </div>
+            <div style="margin-top:12px;">
+                <label style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px; display:block;">Tambah Permintaan (opsional):</label>
+                <textarea id="desc-modal-note" rows="3" placeholder="Tuliskan permintaan tambahan (mis. lebih sedikit gula, tanpa krim, dsb.)" style="width:100%; padding:8px; border-radius:8px; border:1px solid #e6c89a; resize:vertical;"></textarea>
+            </div>
+        </div>
+        
+        <!-- Size selection for certain foods (Burger, Pizza) -->
+        <div id="desc-modal-size-container" style="display: none; background: #fff8f0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #f6d7b7;">
+            <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">📏 Pilih Ukuran:</p>
+            <div style="display:flex; flex-direction: column; gap:8px;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-small" name="size" value="small" checked><span style="color:#555;">Small</span></label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-medium" name="size" value="medium"><span style="color:#555;">Medium</span></label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-high" name="size" value="high"><span style="color:#555;">High</span></label>
+            </div>
+            <div style="margin-top:12px;">
+                <label style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px; display:block;">Tambah Permintaan (opsional):</label>
+                <textarea id="desc-modal-note-food" rows="3" placeholder="Tuliskan permintaan tambahan untuk makanan (mis. tanpa bawang, saus terpisah)" style="width:100%; padding:8px; border-radius:8px; border:1px solid #f1d7b0; resize:vertical;"></textarea>
+            </div>
+        </div>
+        
+        <div class="modal-actions">
+            <button class="btn btn-shop" id="desc-modal-add-btn">Tambah ke Keranjang</button>
+            <button class="btn btn-view" id="desc-modal-close-btn">Kembali</button>
+        </div>
+    </div>
+</div>
 
 <!-- Add-to-cart modal -->
 <div id="add-modal-menu" class="modal" aria-hidden="true">
@@ -567,6 +748,23 @@ footer {
 <script>
     // Modal buttons behavior
     document.addEventListener('DOMContentLoaded', function(){
+        // Description modal close button
+        const descModal = document.getElementById('desc-modal');
+        const closeDescBtn = document.getElementById('desc-modal-close-btn');
+        
+        if (closeDescBtn) {
+            closeDescBtn.addEventListener('click', function() {
+                if (descModal) descModal.classList.remove('active');
+            });
+        }
+        
+        // Close description modal when clicking outside
+        if (descModal) {
+            descModal.addEventListener('click', function(e) {
+                if (e.target === descModal) descModal.classList.remove('active');
+            });
+        }
+
         const addModal = document.getElementById('add-modal-menu');
         const goCart = document.getElementById('menu-go-cart');
         if(goCart){
@@ -587,7 +785,7 @@ footer {
 
 <!-- Mini Cart (Floating) -->
 <aside id="mini-cart" class="mini-cart" aria-live="polite">
-    <div class="mini-cart-header">Keranjang Anda</div>
+    <div class="mini-cart-header">Pembelian Saya</div>
     <div class="mini-cart-items" id="mini-cart-items">
         <!-- items injected here -->
     </div>
@@ -619,11 +817,16 @@ footer {
 
             const div = document.createElement('div');
             div.className = 'mini-cart-item';
+            const metaParts = [];
+            if(it.size) metaParts.push(it.size);
+            if(it.temperature) metaParts.push(it.temperature);
+            const metaDisplay = metaParts.length ? ` (${metaParts.join(' · ')})` : '';
             div.innerHTML = `
                 <img src="${it.image}" alt="${it.name}">
                 <div class="meta">
-                    <div class="name">${it.name}</div>
+                    <div class="name">${it.name}${metaDisplay}</div>
                     <div class="price">${new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(it.price)} · x${it.quantity}</div>
+                    ${it.note ? `<div style="font-size:12px;color:#666;margin-top:6px">Permintaan: ${it.note}</div>` : ''}
                 </div>
                 <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
                     <button style="background:transparent;border:none;color:#c33;cursor:pointer;font-weight:700" onclick="removeMiniItem(${idx})">Hapus</button>
@@ -691,6 +894,5 @@ footer {
         if(typeof updateCartCount === 'function') updateCartCount();
     });
 </script>
-
 </body>
 </html>
