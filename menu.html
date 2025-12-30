@@ -1,898 +1,956 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hollander Coffee</title>
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hollander Coffee</title>
 
-<style>
-:root {
-    --bg: #f6f1e7;
-    --brown-dark: #4e2f1c;
-    --brown: #6d4c41;
-    --brown-light: #a1887f;
-    --cream: #fff6e5;
-}
+    <style>
+    :root {
+        --bg: #f6f1e7;
+        --brown-dark: #4e2f1c;
+        --brown: #6d4c41;
+        --brown-light: #a1887f;
+        --cream: #fff6e5;
+    }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-body {
-    font-family: "Segoe UI", sans-serif;
-    background: var(--bg);
-    color: #2d2d2d;
-}
+    body {
+        font-family: "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: #2d2d2d;
+    }
 
-/* ================= NAVBAR ================= */
-nav {
-    background-color: #FFE3BB;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
+    /* ================= NAVBAR ================= */
+    nav {
+        background-color: #FFE3BB;
+        padding: 20px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    nav .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--brown-dark);
+    }
+
+    nav ul {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+
+    nav ul li a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s;
+        display: inline-flex;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+    padding: 8px 10px;
+    height: auto;
+    width: 50px;
+    line-height: 1;
+    }
 
-nav .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--brown-dark);
-}
+    nav ul li a:hover {
+        color: #8B4513;
+    }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-}
+    /* ================= MENU ================= */
+    .menu-section {
+        padding: 60px 50px;
+    }
 
+    .menu-header {
+        background: linear-gradient(135deg, #ffd96a, #FFE3BB);
+        border: 2px solid var(--brown-dark);
+        padding: 40px;
+        border-radius: 18px;
+        margin-bottom: 50px;
+        box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+        position: relative;
+        overflow: hidden;
+    }
 
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.3s;
-    display: inline-flex;
-  align-items: center;
-  padding: 8px 10px;
-  height: auto;
-  width: 50px;
-  line-height: 1;
-}
+    .menu-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.4) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(139,69,19,0.05) 0%, transparent 50%);
+        pointer-events: none;
+    }
 
-nav ul li a:hover {
-    color: #8B4513;
-}
-
-/* ================= MENU ================= */
-.menu-section {
-    padding: 60px 50px;
-}
-
-.menu-header {
-    background: linear-gradient(135deg, #ffd96a, #FFE3BB);
-    border: 2px solid var(--brown-dark);
-    padding: 40px;
-    border-radius: 18px;
-    margin-bottom: 50px;
-    box-shadow: 0 16px 40px rgba(0,0,0,0.12);
-    position: relative;
-    overflow: hidden;
-}
-
-.menu-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.4) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(139,69,19,0.05) 0%, transparent 50%);
-    pointer-events: none;
-}
-
-.menu-header-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-}
-
-.menu-header-icon {
-    font-size: 48px;
-    margin-bottom: 12px;
-}
-
-.menu-section h2 {
-    text-align: center;
-    font-size: 36px;
-    margin: 0 0 16px 0;
-    color: var(--brown-dark);
-    font-weight: 800;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.08);
-}
-
-.menu-header p {
-    text-align: center;
-    color: #5a4a3a;
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.5;
-    font-weight: 500;
-}
-
-.menu-header-decoration {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 14px;
-    font-size: 20px;
-}
-
-.menu-section h3 {
-    text-align: center;
-    font-size: 24px;
-    color: var(--brown-dark);
-}
-
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 35px;
-}
-
-/* Cart button in navbar */
-.cart-btn{
-    background: transparent;
-    border: 2px solid transparent;
-    padding: 6px 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-weight:700;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-
-  padding: 8px 10px; /* samakan padding vertikal dengan link */
-  display: inline-flex;
-  align-items: center;
-
-}
-.cart-btn:hover{background: rgba(0,0,0,0.03)}
-.cart-count{
-    background:#ff3b30;color:white;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:800;min-width:20px;text-align:center;
-}
-
-.menu-card {
-    background: var(--brown);
-    padding: 25px;
-    border-radius: 30px;
-    text-align: center;
-    color: white;
-    transition: all 0.35s ease;
-}
-
-.menu-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 35px rgba(0,0,0,0.25);
-}
-
-.menu-card-title {
-    background: var(--brown-light);
-    padding: 12px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    font-weight: bold;
-}
-
-.menu-card img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 20px;
-    margin-bottom: 15px;
-}
-
-.menu-card-price {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-/* ================= STORE SECTION ================= */
-.bottom-section {
-    padding: 90px 60px;
-    display: grid;
-    grid-template-columns: 2.2fr 1fr;
-    gap: 60px;
-    position: relative;
-}
-
-.store-image img {
-    width: 100%;
-    height: 360px;
-    object-fit: cover;
-    border-radius: 40px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-}
-
-.beans-image img {
-    position: absolute;
-    right: 60px;
-    bottom: -40px;
-    width: 260px;
-}
-
-/* ================= FOOTER ================= */
-footer {
-    background: var(--brown-dark);
-    color: white;
-    padding: 30px 50px;
-    text-align: center;
-    font-size: 13px;
-}
-
-/* Keep section heights consistent with home.html */
-.site-section { padding: 60px 50px; min-height: 320px }
-
-/* ================= RESPONSIVE ================= */
-@media (max-width: 1024px) {
-    .promo-container {
-        grid-template-columns: 1fr;
+    .menu-header-content {
+        position: relative;
+        z-index: 1;
         text-align: center;
     }
 
-    .menu-grid {
-        grid-template-columns: repeat(2,1fr);
+    .menu-header-icon {
+        font-size: 48px;
+        margin-bottom: 12px;
     }
 
+    .menu-section h2 {
+        text-align: center;
+        font-size: 36px;
+        margin: 0 0 16px 0;
+        color: var(--brown-dark);
+        font-weight: 800;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    .menu-header p {
+        text-align: center;
+        color: #5a4a3a;
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.5;
+        font-weight: 500;
+    }
+
+    .menu-header-decoration {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        margin-top: 14px;
+        font-size: 20px;
+    }
+
+    .menu-section h3 {
+        text-align: center;
+        font-size: 24px;
+        color: var(--brown-dark);
+    }
+
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        gap: 35px;
+    }
+
+    /* Cart button in navbar */
+    .cart-btn{
+        background: transparent;
+        border: 2px solid transparent;
+        padding: 6px 10px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight:700;
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+
+    padding: 8px 10px; /* samakan padding vertikal dengan link */
+    display: inline-flex;
+    align-items: center;
+
+    }
+    .cart-btn:hover{background: rgba(0,0,0,0.03)}
+    .cart-count{
+        background:#ff3b30;color:white;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:800;min-width:20px;text-align:center;
+    }
+
+    .menu-card {
+        background: var(--brown);
+        padding: 25px;
+        border-radius: 30px;
+        text-align: center;
+        color: white;
+        transition: all 0.35s ease;
+    }
+
+    .menu-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+    }
+
+    .menu-card-title {
+        background: var(--brown-light);
+        padding: 12px;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    .menu-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 20px;
+        margin-bottom: 15px;
+    }
+
+    .menu-card-price {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    /* ================= STORE SECTION ================= */
     .bottom-section {
-        grid-template-columns: 1fr;
+        padding: 90px 60px;
+        display: grid;
+        grid-template-columns: 2.2fr 1fr;
+        gap: 60px;
+        position: relative;
+    }
+
+    .store-image img {
+        width: 100%;
+        height: 360px;
+        object-fit: cover;
+        border-radius: 40px;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.3);
     }
 
     .beans-image img {
-        position: static;
-        margin: 30px auto 0;
-        display: block;
+        position: absolute;
+        right: 60px;
+        bottom: -40px;
+        width: 260px;
     }
-}
 
-@media (max-width: 768px) {
-    nav {
+    /* ================= FOOTER ================= */
+    footer {
+        background: var(--brown-dark);
+        color: white;
+        padding: 30px 50px;
+        text-align: center;
+        font-size: 13px;
+    }
+
+    /* Keep section heights consistent with home.html */
+    .site-section { padding: 60px 50px; min-height: 320px }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 1024px) {
+        .promo-container {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .menu-grid {
+            grid-template-columns: repeat(2,1fr);
+        }
+
+        .bottom-section {
+            grid-template-columns: 1fr;
+        }
+
+        .beans-image img {
+            position: static;
+            margin: 30px auto 0;
+            display: block;
+        }
+    }
+
+    @media (max-width: 768px) {
+        nav {
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Centered add-to-cart modal */
+    .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 3000;
+        justify-content: center;
+        align-items: center;
+    }
+    .modal.active { display: flex }
+    .modal-content {
+        background: #fff;
+        padding: 20px 22px;
+        border-radius: 12px;
+        max-width: 420px;
+        width: calc(100% - 40px);
+        box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+        text-align: center;
+    }
+    .modal-content h4 { margin-bottom:8px; color:var(--brown-dark) }
+    .modal-content p { color:#555; margin-bottom:14px }
+    .modal-actions { display:flex; gap:10px; justify-content:center }
+    .modal-actions .btn { padding:10px 16px; border-radius:8px; font-weight:700; text-decoration:none }
+    .btn-shop {
+        background: #ff770f;
+        color: white;
+        border: none;
+        padding: 10px 18px;
+        border-radius: 10px;
+    }
+    .btn-shop:hover{ filter:brightness(.95) }
+    .btn-view {
+        background: transparent;
+        color: var(--brown-dark);
+        border: 2px solid var(--brown-dark);
+        padding: 8px 16px;
+        border-radius: 10px;
+    }
+    .btn-view:hover{ background: rgba(78,47,28,0.06) }
+
+    /* Mini cart (floating) */
+    .mini-cart {
+        position: fixed;
+        right: 22px;
+        top: 140px;
+        width: 320px;
+        max-height: 60vh;
+        background: linear-gradient(180deg,#fffaf2,#ffffff);
+        border-radius: 14px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+        overflow: hidden;
+        z-index: 4000;
+        display: none;
         flex-direction: column;
-        gap: 15px;
+        transform-origin: top right;
     }
-
-    .menu-grid {
-        grid-template-columns: 1fr;
+    .mini-cart.visible { display:flex; animation: popIn .18s ease }
+    .mini-cart.visible { display:flex }
+    .mini-cart.pop-enter{ animation: popIn .18s ease }
+    @keyframes popIn{ from{ transform: translateY(-8px) scale(.98); opacity:0 } to{ transform:none; opacity:1 } }
+    .mini-cart-header{
+        padding:12px 14px;
+        background: #ffefcf;
+        border-bottom:1px solid rgba(0,0,0,0.04);
+        font-weight:800;
+        color:var(--brown-dark);
     }
-}
+    .mini-cart-items{padding:10px;overflow:auto}
+    .mini-cart-item{display:flex;gap:10px;align-items:center;padding:8px 6px;border-radius:8px;margin-bottom:8px}
+    .mini-cart-item img{width:56px;height:48px;object-fit:cover;border-radius:8px}
+    .mini-cart-item .meta{flex:1}
+    .mini-cart-item .meta .name{font-weight:700;color:#3b2a21}
+    .mini-cart-item .meta .price{color:var(--brown);font-size:13px}
+    .mini-cart-footer{padding:12px;border-top:1px solid rgba(0,0,0,0.04);display:flex;gap:8px;align-items:center}
+    .mini-cart-footer .total{flex:1;font-weight:800;color:var(--brown-dark)}
+    .mini-cart-footer .mini-btn{background:#4e2f1c;color:#fff;padding:8px 12px;border-radius:8px;border:none;font-weight:700}
 
-/* Centered add-to-cart modal */
-.modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 3000;
-    justify-content: center;
-    align-items: center;
-}
-.modal.active { display: flex }
-.modal-content {
-    background: #fff;
-    padding: 20px 22px;
-    border-radius: 12px;
-    max-width: 420px;
-    width: calc(100% - 40px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.25);
-    text-align: center;
-}
-.modal-content h4 { margin-bottom:8px; color:var(--brown-dark) }
-.modal-content p { color:#555; margin-bottom:14px }
-.modal-actions { display:flex; gap:10px; justify-content:center }
-.modal-actions .btn { padding:10px 16px; border-radius:8px; font-weight:700; text-decoration:none }
-.btn-shop {
-    background: #ff770f;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 10px;
-}
-.btn-shop:hover{ filter:brightness(.95) }
-.btn-view {
-    background: transparent;
-    color: var(--brown-dark);
-    border: 2px solid var(--brown-dark);
-    padding: 8px 16px;
-    border-radius: 10px;
-}
-.btn-view:hover{ background: rgba(78,47,28,0.06) }
+    @media (max-width: 1024px){
+        .mini-cart{display:none}
+    }
+    </style>
+    </head>
 
-/* Mini cart (floating) */
-.mini-cart {
-    position: fixed;
-    right: 22px;
-    top: 140px;
-    width: 320px;
-    max-height: 60vh;
-    background: linear-gradient(180deg,#fffaf2,#ffffff);
-    border-radius: 14px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.18);
-    overflow: hidden;
-    z-index: 4000;
-    display: none;
-    flex-direction: column;
-    transform-origin: top right;
-}
-.mini-cart.visible { display:flex; animation: popIn .18s ease }
-.mini-cart.visible { display:flex }
-.mini-cart.pop-enter{ animation: popIn .18s ease }
-@keyframes popIn{ from{ transform: translateY(-8px) scale(.98); opacity:0 } to{ transform:none; opacity:1 } }
-.mini-cart-header{
-    padding:12px 14px;
-    background: #ffefcf;
-    border-bottom:1px solid rgba(0,0,0,0.04);
-    font-weight:800;
-    color:var(--brown-dark);
-}
-.mini-cart-items{padding:10px;overflow:auto}
-.mini-cart-item{display:flex;gap:10px;align-items:center;padding:8px 6px;border-radius:8px;margin-bottom:8px}
-.mini-cart-item img{width:56px;height:48px;object-fit:cover;border-radius:8px}
-.mini-cart-item .meta{flex:1}
-.mini-cart-item .meta .name{font-weight:700;color:#3b2a21}
-.mini-cart-item .meta .price{color:var(--brown);font-size:13px}
-.mini-cart-footer{padding:12px;border-top:1px solid rgba(0,0,0,0.04);display:flex;gap:8px;align-items:center}
-.mini-cart-footer .total{flex:1;font-weight:800;color:var(--brown-dark)}
-.mini-cart-footer .mini-btn{background:#4e2f1c;color:#fff;padding:8px 12px;border-radius:8px;border:none;font-weight:700}
+    <body>
 
-@media (max-width: 1024px){
-    .mini-cart{display:none}
-}
-</style>
-</head>
-
-<body>
-
-<nav>
-    <div class="logo">☕ Hollander Coffee</div>
-    <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="#menu">Menu</a></li>
-        <li><a href="#contact">Kontak</a></li>
-        <li>
-            <button id="cart-toggle" class="cart-btn" aria-label="Buka Keranjang">
-                🧺 <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
-            </button>
-        </li>
-    </ul>
-</nav>
+    <nav>
+        <div class="logo">☕ Hollander Coffee</div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#contact">Kontak</a></li>
+            <li>
+                <button id="cart-toggle" class="cart-btn" aria-label="Buka Keranjang">
+                    🧺 <span class="cart-count" id="cart-count" aria-hidden="true">0</span>
+                </button>
+            </li>
+        </ul>
+    </nav>
 
 
 
 
-<section class="menu-section" id="menu">
-    <div class="menu-header">
-        <div class="menu-header-content">
-            <div class="menu-header-icon">☕</div>
-            <h2>Menu Caffee Hollander</h2>
-            <p>Beverages & Food — kopi dan pilihan makanan ringan untuk menemani waktu Anda</p>
-            <div class="menu-header-decoration">
-                <span>✨</span>
-                <span>•</span>
-                <span>✨</span>
-            </div>
-        </div>
-    </div>
-
-    <h3 style="color:var(--brown-dark);margin-bottom:12px">Drinks</h3>
-    <div class="menu-grid" id="drinks-grid">
-        <!-- Drinks akan dirender oleh JavaScript -->
-    </div>
-
-    <h3 style="color:var(--brown-dark);margin:36px 0 12px">Food</h3>
-    <div class="menu-grid" id="food-grid">
-        <!-- Food akan dirender oleh JavaScript -->
-    </div>
-</section>
-
-
-<footer id="contact">
-    © 2024 Hollander Coffee • ☎ 0851-9896-0882 • 📍 Indonesia
-</footer>
-
-<script>
-    // Data menu
-    const menuItems = [
-            {
-                name: 'Americano',
-                price: 25000,
-                image: 'americano.jpg',
-                category: 'Drink',
-                description: 'Kopi espresso yang kuat dan murni, dipadu dengan air panas. Cita rasa yang tajam dan segar.',
-                ingredients: 'Biji Kopi Premium (Arabika), Air Panas, Gula (optional)'
-            },
-            {
-                name: 'Espresso',
-                price: 20000,
-                image: 'Espresso.jpg',
-                category: 'Drink',
-                description: 'Kopi espresso original dengan rasa yang intens dan pekat. Sempurna untuk pecinta kopi sejati.',
-                ingredients: 'Biji Kopi Premium (Arabika), Tekanan Air 9 Bar'
-            },
-            {
-                name: 'Cappuccino',
-                price: 30000,
-                image: 'cappucino.jpg',
-                category: 'Drink',
-                description: 'Kombinasi sempurna espresso, susu uap, dan busa. Creamy dan lezat di setiap tegukan.',
-                ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Busa Susu, Gula (optional), Coklat Bubuk (topping)'
-            },
-            {
-                name: 'Latte',
-                price: 35000,
-                image: 'Latte.jpg',
-                category: 'Drink',
-                description: 'Kopi espresso dengan susu steamed yang melimpah. Smooth dan creamy dengan rasa kopi yang seimbang.',
-                ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Gula (optional), Vanilla Extract (optional)'
-            },
-            {
-                name: 'Mocha',
-                price: 40000,
-                image: 'macha.jpg',
-                category: 'Drink',
-                description: 'Paduan sempurna antara espresso, coklat, dan susu. Manis dan kaya dengan sentuhan mocha klasik.',
-                ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Sirup Coklat, Gula, Whipped Cream (topping)'
-            },
-            {
-                name: 'Gula Aren',
-                price: 30000,
-                image: 'gulaaren.jpg',
-                category: 'Drink',
-                description: 'Kopi dengan pemanis alami gula aren. Rasa tradisional Indonesia dengan manfaat kesehatan.',
-                ingredients: 'Biji Kopi Premium (Robusta), Gula Aren 25gr, Air, Susu Fresh (optional), Cengkeh'
-            },
-            {
-                name: 'Caramel',
-                price: 30000,
-                image: 'Caramel.jpg',
-                category: 'Drink',
-                description: 'Kopi premium dengan sirup karamel yang lezat. Manis dan creamy, perfect untuk afternoon break.',
-                ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Sirup Karamel 15ml, Gula (optional), Whipped Cream (optional)'
-            },
-            {
-                name: 'Pizza',
-                price: 25000,
-                image: 'Pizza.jpg',
-                category: 'Food',
-                description: 'Pizza dengan topping pilihan, cheese yang meleleh, dan crust yang renyah. Cocok ditemani minuman favorit.',
-                ingredients: 'Tepung Terigu, Mozzarella Cheese, Tomato Sauce, Daging Sapi Cincang, Paprika, Oregano, Olive Oil'
-            },
-            {
-                name: 'Burger',
-                price: 45000,
-                image: 'Burger.jpg',
-                category: 'Food',
-                description: 'Burger premium dengan daging sapi berkualitas, lettuce segar, dan special sauce. Juicy dan menggugah selera.',
-                ingredients: 'Bun Gandum, Daging Sapi Prime 150gr, Lettuce Segar, Tomat, Onion, Pickles, Cheese Cheddar, Special Sauce, Mayonnaise'
-            },
-            {
-                name: 'Baseball Steak',
-                price: 30000,
-                image: 'Baseball Steak.jpg',
-                category: 'Food',
-                description: 'Steak tenderloin premium yang empuk. Dimasak sempurna dengan bumbu khas Hollander Coffee.',
-                ingredients: 'Daging Tenderloin 180gr, Garam, Merica Hitam, Butter, Garlic, Rosemary, Thyme'
-            },
-            {
-                name: 'Pasta',
-                price: 40000,
-                image: 'Spaghetti.jpg',
-                category: 'Food',
-                description: 'Spaghetti dengan saus pilihan (marinara atau carbonara). Al dente dan creamy, lezat di lidah.',
-                ingredients: 'Spaghetti Premium, Saus Tomato, Basil Segar, Garlic, Olive Oil, Parmesan Cheese, Garam, Merica'
-            }
-    ];
-
-    // Render menu items separated by category
-    function renderMenu() {
-        const drinksGrid = document.getElementById('drinks-grid');
-        const foodGrid = document.getElementById('food-grid');
-        let drinksHTML = '';
-        let foodHTML = '';
-
-        menuItems.forEach(item => {
-            const card = `
-                <div class="menu-card" onclick="showDescription('${item.name}', ${item.price}, '${item.image}', '${item.description.replace(/'/g, "\\'")}')">
-                    <div class="menu-card-title">${item.name}</div>
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="menu-card-price">Rp.${item.price.toLocaleString('id-ID')}</div>
+    <section class="menu-section" id="menu">
+        <div class="menu-header">
+            <div class="menu-header-content">
+                <div class="menu-header-icon">☕</div>
+                <h2>Menu Caffee Hollander</h2>
+                <p>Beverages & Food — kopi dan pilihan makanan ringan untuk menemani waktu Anda</p>
+                <div class="menu-header-decoration">
+                    <span>✨</span>
+                    <span>•</span>
+                    <span>✨</span>
                 </div>
-            `;
-
-            if (item.category && item.category.toLowerCase() === 'food') {
-                foodHTML += card;
-            } else {
-                drinksHTML += card;
-            }
-        });
-
-        drinksGrid.innerHTML = drinksHTML;
-        foodGrid.innerHTML = foodHTML;
-    }
-
-    // Load cart dari localStorage
-    function loadCart() {
-        return JSON.parse(localStorage.getItem('cart')) || [];
-    }
-
-    // Show description modal
-    function showDescription(name, price, image, description) {
-        const modal = document.getElementById('desc-modal');
-        const title = document.getElementById('desc-modal-title');
-        const img = document.getElementById('desc-modal-image');
-        const desc = document.getElementById('desc-modal-description');
-        const priceEl = document.getElementById('desc-modal-price');
-        const addBtn = document.getElementById('desc-modal-add-btn');
-        const ingredientsEl = document.getElementById('desc-modal-ingredients');
-        const tempContainerEl = document.getElementById('desc-modal-temp-container');
-        
-        // Get the item to check if it's a drink
-        const item = menuItems.find(it => it.name === name);
-        
-        if (title) title.textContent = name;
-        if (img) img.src = image;
-        if (img) img.alt = name;
-        if (desc) desc.textContent = description;
-        if (priceEl) priceEl.textContent = 'Rp.' + price.toLocaleString('id-ID');
-        if (ingredientsEl && item) ingredientsEl.textContent = item.ingredients;
-        
-        // Show temperature options only for drinks
-        if (tempContainerEl) {
-            if (item && item.category && item.category.toLowerCase() === 'drink') {
-                tempContainerEl.style.display = 'block';
-                // Reset radio button
-                const coldRadio = document.getElementById('temp-cold');
-                if (coldRadio) coldRadio.checked = true;
-                // Reset custom note field if present
-                const noteEl = document.getElementById('desc-modal-note');
-                if (noteEl) noteEl.value = '';
-            } else {
-                tempContainerEl.style.display = 'none';
-            }
-        }
-
-        // Show size options for certain food items (Burger, Pizza)
-        const sizeContainerEl = document.getElementById('desc-modal-size-container');
-        if (sizeContainerEl) {
-            const showSize = item && item.category && item.category.toLowerCase() === 'food' &&
-                (item.name && (item.name.toLowerCase() === 'burger' || item.name.toLowerCase() === 'pizza'));
-            if (showSize) {
-                sizeContainerEl.style.display = 'block';
-                // Reset size radios
-                const smallRadio = document.getElementById('size-small');
-                if (smallRadio) smallRadio.checked = true;
-                // Reset food note
-                const noteFoodEl = document.getElementById('desc-modal-note-food');
-                if (noteFoodEl) noteFoodEl.value = '';
-            } else {
-                sizeContainerEl.style.display = 'none';
-            }
-        }
-        
-        if (addBtn) addBtn.onclick = function() { addToCart(name, price, image); };
-        
-        if (modal) modal.classList.add('active');
-    }
-
-    // Save cart ke localStorage
-    function saveCart(cart) {
-        localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    // Update cart count badge
-    function updateCartCount(){
-        const cart = loadCart();
-        const badge = document.getElementById('cart-count');
-        if(!badge) return;
-        const totalItems = cart.reduce((s,i)=>s + (i.quantity||0),0);
-        badge.textContent = totalItems;
-        badge.style.display = totalItems > 0 ? 'inline-block' : 'none';
-    }
-
-    // Add to cart
-    function addToCart(name, price, image) {
-        const cart = loadCart();
-
-        // Get temperature if it's a drink
-        let temperature = '';
-        const tempCold = document.getElementById('temp-cold');
-        const tempNormal = document.getElementById('temp-normal');
-        const tempHot = document.getElementById('temp-hot');
-
-        if (tempCold && tempCold.checked) {
-            temperature = 'Dingin';
-        } else if (tempNormal && tempNormal.checked) {
-            temperature = 'Biasa';
-        } else if (tempHot && tempHot.checked) {
-            temperature = 'Hangat';
-        }
-
-        // Get optional custom request/note from user
-        const noteEl = document.getElementById('desc-modal-note');
-        const noteFoodEl = document.getElementById('desc-modal-note-food');
-        const noteDrink = noteEl ? noteEl.value.trim() : '';
-        const noteFood = noteFoodEl ? noteFoodEl.value.trim() : '';
-        // prefer specific field depending on which is used
-        const note = noteDrink || noteFood || '';
-
-        // Get size if it's a food item (Burger/Pizza)
-        let size = '';
-        const sizeSmall = document.getElementById('size-small');
-        const sizeMedium = document.getElementById('size-medium');
-        const sizeHigh = document.getElementById('size-high');
-        if (sizeSmall && sizeSmall.checked) {
-            size = 'Small';
-        } else if (sizeMedium && sizeMedium.checked) {
-            size = 'Medium';
-        } else if (sizeHigh && sizeHigh.checked) {
-            size = 'High';
-        }
-
-        // Check if item already exists with same temperature, size and same note
-        const existingItem = cart.find(item => item.name === name && (item.temperature || '') === (temperature || '') && (item.size || '') === (size || '') && (item.note || '') === (note || ''));
-
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({
-                name: name,
-                price: price,
-                image: image,
-                temperature: temperature,
-                size: size,
-                note: note,
-                quantity: 1
-            });
-        }
-
-        saveCart(cart);
-        // update mini-cart if present
-        if(typeof renderMiniCart === 'function') renderMiniCart();
-        // show centered modal confirmation instead of alert
-        const addModal = document.getElementById('add-modal-menu');
-        const addMsg = document.getElementById('add-modal-menu-msg');
-        const descMsg = temperature ? ` (${temperature})` : '';
-        const noteMsg = note ? ` Permintaan: ${note}` : '';
-        if(addMsg) addMsg.textContent = `${name}${descMsg} ditambahkan ke pembelian!${noteMsg}`;
-        if(addModal) addModal.classList.add('active');
-
-        // Close description modal
-        const descModal = document.getElementById('desc-modal');
-        if (descModal) descModal.classList.remove('active');
-    }
-
-    // Render menu on page load
-    renderMenu();
-</script>
-
-<!-- Description modal -->
-<div id="desc-modal" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="desc-modal-title" style="max-width: 500px;">
-        <img id="desc-modal-image" src="" alt="" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 16px;">
-        <h4 id="desc-modal-title" style="margin-bottom: 8px;">Item Name</h4>
-        <p id="desc-modal-price" style="font-weight: bold; color: var(--brown-dark); margin-bottom: 12px; font-size: 18px;">Rp. 0</p>
-        <p id="desc-modal-description" style="color: #555; margin-bottom: 12px; text-align: left; line-height: 1.6;">Description</p>
-        
-        <div style="background: #f5f5f5; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
-            <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px;">Komposisi:</p>
-            <p id="desc-modal-ingredients" style="color: #555; margin: 0; font-size: 13px; line-height: 1.5;">Ingredients</p>
-        </div>
-        
-        <div id="desc-modal-temp-container" style="display: none; background: #fff3e0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #ffe0b2;">
-            <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">Pengaturan Suhu:</p>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                    <input type="radio" id="temp-cold" name="temperature" value="cold" checked>
-                    <span style="color: #555;">Dingin</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                    <input type="radio" id="temp-normal" name="temperature" value="normal">
-                    <span style="color: #555;">Biasa</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                    <input type="radio" id="temp-hot" name="temperature" value="hot">
-                    <span style="color: #555;">Hangat</span>
-                </label>
-            </div>
-            <div style="margin-top:12px;">
-                <label style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px; display:block;">Tambah Permintaan (opsional):</label>
-                <textarea id="desc-modal-note" rows="3" placeholder="Tuliskan permintaan tambahan (mis. lebih sedikit gula, tanpa krim, dsb.)" style="width:100%; padding:8px; border-radius:8px; border:1px solid #e6c89a; resize:vertical;"></textarea>
             </div>
         </div>
-        
-        <!-- Size selection for certain foods (Burger, Pizza) -->
-        <div id="desc-modal-size-container" style="display: none; background: #fff8f0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #f6d7b7;">
-            <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">📏 Pilih Ukuran:</p>
-            <div style="display:flex; flex-direction: column; gap:8px;">
-                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-small" name="size" value="small" checked><span style="color:#555;">Small</span></label>
-                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-medium" name="size" value="medium"><span style="color:#555;">Medium</span></label>
-                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-high" name="size" value="high"><span style="color:#555;">High</span></label>
-            </div>
-            <div style="margin-top:12px;">
-                <label style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px; display:block;">Tambah Permintaan (opsional):</label>
-                <textarea id="desc-modal-note-food" rows="3" placeholder="Tuliskan permintaan tambahan untuk makanan (mis. tanpa bawang, saus terpisah)" style="width:100%; padding:8px; border-radius:8px; border:1px solid #f1d7b0; resize:vertical;"></textarea>
-            </div>
+
+        <h3 style="color:var(--brown-dark);margin-bottom:12px">Drinks</h3>
+        <div class="menu-grid" id="drinks-grid">
+            <!-- Drinks akan dirender oleh JavaScript -->
         </div>
-        
-        <div class="modal-actions">
-            <button class="btn btn-shop" id="desc-modal-add-btn">Tambah ke Keranjang</button>
-            <button class="btn btn-view" id="desc-modal-close-btn">Kembali</button>
+
+        <h3 style="color:var(--brown-dark);margin:36px 0 12px">Food</h3>
+        <div class="menu-grid" id="food-grid">
+            <!-- Food akan dirender oleh JavaScript -->
         </div>
-    </div>
-</div>
+    </section>
 
-<!-- Add-to-cart modal -->
-<div id="add-modal-menu" class="modal" aria-hidden="true">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="add-modal-menu-title">
-        <h4 id="add-modal-menu-title">Item Ditambahkan</h4>
-        <p id="add-modal-menu-msg">Item ditambahkan ke pembelian.</p>
-        <div class="modal-actions">
-            <a class="btn btn-shop" href="menu.html">Lanjut Belanja</a>
-            <button class="btn btn-view" id="menu-go-cart">Lihat Pembelian</button>
-        </div>
-    </div>
-</div>
 
-<script>
-    // Modal buttons behavior
-    document.addEventListener('DOMContentLoaded', function(){
-        // Description modal close button
-        const descModal = document.getElementById('desc-modal');
-        const closeDescBtn = document.getElementById('desc-modal-close-btn');
-        
-        if (closeDescBtn) {
-            closeDescBtn.addEventListener('click', function() {
-                if (descModal) descModal.classList.remove('active');
-            });
-        }
-        
-        // Close description modal when clicking outside
-        if (descModal) {
-            descModal.addEventListener('click', function(e) {
-                if (e.target === descModal) descModal.classList.remove('active');
-            });
-        }
+    <footer id="contact">
+        © 2024 Hollander Coffee • ☎ 0851-9896-0882 • 📍 Indonesia
+    </footer>
 
-        const addModal = document.getElementById('add-modal-menu');
-        const goCart = document.getElementById('menu-go-cart');
-        if(goCart){
-            goCart.addEventListener('click', function(){
-                if(addModal) addModal.classList.remove('active');
-                window.location.href = 'transaksi.html';
-            });
-        }
+    <script>
+        // Data menu
+        const menuItems = [
+                {
+                    name: 'Americano',
+                    price: 25000,
+                    image: 'americano.jpg',
+                    category: 'Drink',
+                    description: 'Kopi espresso yang kuat dan murni, dipadu dengan air panas. Cita rasa yang tajam dan segar.',
+                    ingredients: 'Biji Kopi Premium (Arabika), Air Panas, Gula (optional)'
+                },
+                {
+                    name: 'Espresso',
+                    price: 20000,
+                    image: 'Espresso.jpg',
+                    category: 'Drink',
+                    description: 'Kopi espresso original dengan rasa yang intens dan pekat. Sempurna untuk pecinta kopi sejati.',
+                    ingredients: 'Biji Kopi Premium (Arabika), Tekanan Air 9 Bar'
+                },
+                {
+                    name: 'Cappuccino',
+                    price: 30000,
+                    image: 'cappucino.jpg',
+                    category: 'Drink',
+                    description: 'Kombinasi sempurna espresso, susu uap, dan busa. Creamy dan lezat di setiap tegukan.',
+                    ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Busa Susu, Gula (optional), Coklat Bubuk (topping)'
+                },
+                {
+                    name: 'Latte',
+                    price: 35000,
+                    image: 'Latte.jpg',
+                    category: 'Drink',
+                    description: 'Kopi espresso dengan susu steamed yang melimpah. Smooth dan creamy dengan rasa kopi yang seimbang.',
+                    ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Gula (optional), Vanilla Extract (optional)'
+                },
+                {
+                    name: 'Mocha',
+                    price: 40000,
+                    image: 'macha.jpg',
+                    category: 'Drink',
+                    description: 'Paduan sempurna antara espresso, coklat, dan susu. Manis dan kaya dengan sentuhan mocha klasik.',
+                    ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Sirup Coklat, Gula, Whipped Cream (topping)'
+                },
+                {
+                    name: 'Gula Aren',
+                    price: 30000,
+                    image: 'gulaaren.jpg',
+                    category: 'Drink',
+                    description: 'Kopi dengan pemanis alami gula aren. Rasa tradisional Indonesia dengan manfaat kesehatan.',
+                    ingredients: 'Biji Kopi Premium (Robusta), Gula Aren 25gr, Air, Susu Fresh (optional), Cengkeh'
+                },
+                {
+                    name: 'Caramel',
+                    price: 30000,
+                    image: 'Caramel.jpg',
+                    category: 'Drink',
+                    description: 'Kopi premium dengan sirup karamel yang lezat. Manis dan creamy, perfect untuk afternoon break.',
+                    ingredients: 'Biji Kopi Premium (Arabika), Susu Fresh, Sirup Karamel 15ml, Gula (optional), Whipped Cream (optional)'
+                },
+                {
+                    name: 'Pizza',
+                    price: 25000,
+                    image: 'Pizza.jpg',
+                    category: 'Food',
+                    description: 'Pizza dengan topping pilihan, cheese yang meleleh, dan crust yang renyah. Cocok ditemani minuman favorit.',
+                    ingredients: 'Tepung Terigu, Mozzarella Cheese, Tomato Sauce, Daging Sapi Cincang, Paprika, Oregano, Olive Oil',
+                    sizes: {
+                        'Small': 25000,
+                        'Medium': 35000,
+                        'High': 50000
+                    }
+                },
+                {
+                    name: 'Burger',
+                    price: 35000,
+                    image: 'Burger.jpg',
+                    category: 'Food',
+                    description: 'Burger premium dengan daging sapi berkualitas, lettuce segar, dan special sauce. Juicy dan menggugah selera.',
+                    ingredients: 'Bun Gandum, Daging Sapi Prime 150gr, Lettuce Segar, Tomat, Onion, Pickles, Cheese Cheddar, Special Sauce, Mayonnaise',
+                    sizes: {
+                        'Small': 35000,
+                        'Medium': 45000,
+                        'High': 60000
+                    }
+                },
+                {
+                    name: 'Baseball Steak',
+                    price: 30000,
+                    image: 'Baseball Steak.jpg',
+                    category: 'Food',
+                    description: 'Steak tenderloin premium yang empuk. Dimasak sempurna dengan bumbu khas Hollander Coffee.',
+                    ingredients: 'Daging Tenderloin 180gr, Garam, Merica Hitam, Butter, Garlic, Rosemary, Thyme'
+                },
+                {
+                    name: 'Pasta',
+                    price: 40000,
+                    image: 'Spaghetti.jpg',
+                    category: 'Food',
+                    description: 'Spaghetti dengan saus pilihan (marinara atau carbonara). Al dente dan creamy, lezat di lidah.',
+                    ingredients: 'Spaghetti Premium, Saus Tomato, Basil Segar, Garlic, Olive Oil, Parmesan Cheese, Garam, Merica'
+                }
+        ];
 
-        // close modal when clicking outside content
-        if(addModal){
-            addModal.addEventListener('click', function(e){
-                if(e.target === addModal) addModal.classList.remove('active');
-            });
-        }
-    });
-</script>
+        // Render menu items separated by category
+        function renderMenu() {
+            const drinksGrid = document.getElementById('drinks-grid');
+            const foodGrid = document.getElementById('food-grid');
+            let drinksHTML = '';
+            let foodHTML = '';
 
-<!-- Mini Cart (Floating) -->
-<aside id="mini-cart" class="mini-cart" aria-live="polite">
-    <div class="mini-cart-header">Pembelian Saya</div>
-    <div class="mini-cart-items" id="mini-cart-items">
-        <!-- items injected here -->
-    </div>
-    <div class="mini-cart-footer">
-        <div class="total" id="mini-cart-total">Rp. 0</div>
-        <button class="mini-btn" id="mini-cart-view">Lihat Pembelian</button>
-    </div>
-</aside>
-
-<script>
-    // Render mini cart content
-    function renderMiniCart(){
-        const items = loadCart();
-        const container = document.getElementById('mini-cart-items');
-        const totalEl = document.getElementById('mini-cart-total');
-        if(!container || !totalEl) return;
-
-        if(items.length === 0){
-            container.innerHTML = '<div style="padding:12px;color:#666;text-align:center">Belum ada item</div>';
-            totalEl.textContent = 'Rp. 0';
-            return;
-        }
-
-        container.innerHTML = '';
-        let subtotal = 0;
-        items.forEach((it, idx) => {
-            const itemTotal = it.price * it.quantity;
-            subtotal += itemTotal;
-
-            const div = document.createElement('div');
-            div.className = 'mini-cart-item';
-            const metaParts = [];
-            if(it.size) metaParts.push(it.size);
-            if(it.temperature) metaParts.push(it.temperature);
-            const metaDisplay = metaParts.length ? ` (${metaParts.join(' · ')})` : '';
-            div.innerHTML = `
-                <img src="${it.image}" alt="${it.name}">
-                <div class="meta">
-                    <div class="name">${it.name}${metaDisplay}</div>
-                    <div class="price">${new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(it.price)} · x${it.quantity}</div>
-                    ${it.note ? `<div style="font-size:12px;color:#666;margin-top:6px">Permintaan: ${it.note}</div>` : ''}
-                </div>
-                <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
-                    <button style="background:transparent;border:none;color:#c33;cursor:pointer;font-weight:700" onclick="removeMiniItem(${idx})">Hapus</button>
-                    <div style="display:flex;gap:6px;align-items:center">
-                        <button style="background:#eee;border:none;padding:4px 8px;border-radius:6px;cursor:pointer" onclick="updateMiniQty(${idx}, -1)">-</button>
-                        <span style="font-weight:700">${it.quantity}</span>
-                        <button style="background:#eee;border:none;padding:4px 8px;border-radius:6px;cursor:pointer" onclick="updateMiniQty(${idx}, 1)">+</button>
+            menuItems.forEach(item => {
+                const card = `
+                    <div class="menu-card" onclick="showDescription('${item.name}', ${item.price}, '${item.image}', '${item.description.replace(/'/g, "\\'")}')">
+                        <div class="menu-card-title">${item.name}</div>
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="menu-card-price">Rp.${item.price.toLocaleString('id-ID')}</div>
                     </div>
-                </div>
-            `;
+                `;
 
-            container.appendChild(div);
-        });
-
-        totalEl.textContent = new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(subtotal);
-        // update badge count in navbar
-        if(typeof updateCartCount === 'function') updateCartCount();
-    }
-
-    function updateMiniQty(index, change){
-        const cart = loadCart();
-        if(!cart[index]) return;
-        cart[index].quantity += change;
-        if(cart[index].quantity <= 0) cart.splice(index,1);
-        saveCart(cart);
-        renderMiniCart();
-    }
-
-    function removeMiniItem(index){
-        const cart = loadCart();
-        if(!cart[index]) return;
-        cart.splice(index,1);
-        saveCart(cart);
-        renderMiniCart();
-    }
-
-    // Wire mini cart view button
-    document.addEventListener('DOMContentLoaded', function(){
-        const viewBtn = document.getElementById('mini-cart-view');
-        if(viewBtn){
-            viewBtn.addEventListener('click', ()=> window.location.href = 'transaksi.html');
-        }
-        renderMiniCart();
-
-        // cart toggle in navbar
-        const cartToggle = document.getElementById('cart-toggle');
-        const miniCart = document.getElementById('mini-cart');
-        if(cartToggle && miniCart){
-            cartToggle.addEventListener('click', function(e){
-                e.stopPropagation();
-                miniCart.classList.toggle('visible');
-                // update count when opening
-                if(miniCart.classList.contains('visible')) renderMiniCart();
-            });
-
-            // close when clicking outside
-            document.addEventListener('click', function(evt){
-                if(!miniCart.contains(evt.target) && evt.target !== cartToggle){
-                    miniCart.classList.remove('visible');
+                if (item.category && item.category.toLowerCase() === 'food') {
+                    foodHTML += card;
+                } else {
+                    drinksHTML += card;
                 }
             });
+
+            drinksGrid.innerHTML = drinksHTML;
+            foodGrid.innerHTML = foodHTML;
         }
 
-        // ensure badge initialized
-        if(typeof updateCartCount === 'function') updateCartCount();
-    });
-</script>
-</body>
-</html>
+        // Load cart dari localStorage
+        function loadCart() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
+        }
+
+        // Show description modal
+        function showDescription(name, price, image, description) {
+            const modal = document.getElementById('desc-modal');
+            const title = document.getElementById('desc-modal-title');
+            const img = document.getElementById('desc-modal-image');
+            const desc = document.getElementById('desc-modal-description');
+            const priceEl = document.getElementById('desc-modal-price');
+            const addBtn = document.getElementById('desc-modal-add-btn');
+            const ingredientsEl = document.getElementById('desc-modal-ingredients');
+            const tempContainerEl = document.getElementById('desc-modal-temp-container');
+            
+            // Get the item to check if it's a drink
+            const item = menuItems.find(it => it.name === name);
+            
+            if (title) title.textContent = name;
+            if (img) img.src = image;
+            if (img) img.alt = name;
+            if (desc) desc.textContent = description;
+            if (priceEl) priceEl.textContent = 'Rp.' + price.toLocaleString('id-ID');
+            if (ingredientsEl && item) ingredientsEl.textContent = item.ingredients;
+            
+            // Show temperature options only for drinks
+            if (tempContainerEl) {
+                if (item && item.category && item.category.toLowerCase() === 'drink') {
+                    tempContainerEl.style.display = 'block';
+                    // Reset radio button
+                    const coldRadio = document.getElementById('temp-cold');
+                    if (coldRadio) coldRadio.checked = true;
+                    // Reset custom note field if present
+                    const noteEl = document.getElementById('desc-modal-note');
+                    if (noteEl) noteEl.value = '';
+                } else {
+                    tempContainerEl.style.display = 'none';
+                }
+            }
+
+            // Show size options for certain food items (Burger, Pizza)
+            const sizeContainerEl = document.getElementById('desc-modal-size-container');
+            if (sizeContainerEl) {
+                const showSize = item && item.category && item.category.toLowerCase() === 'food' &&
+                    (item.name && (item.name.toLowerCase() === 'burger' || item.name.toLowerCase() === 'pizza'));
+                if (showSize) {
+                    sizeContainerEl.style.display = 'block';
+                    // Reset size radios
+                    const smallRadio = document.getElementById('size-small');
+                    if (smallRadio) smallRadio.checked = true;
+                    // Reset food note
+                    const noteFoodEl = document.getElementById('desc-modal-note-food');
+                    if (noteFoodEl) noteFoodEl.value = '';
+                    // Update price when size changes
+                    updateSizePrice(name);
+                } else {
+                    sizeContainerEl.style.display = 'none';
+                }
+            }
+            
+            if (addBtn) addBtn.onclick = function() { addToCart(name, price, image); };
+            
+            if (modal) modal.classList.add('active');
+        }
+
+        // Update price based on selected size
+        function updateSizePrice(itemName) {
+            const item = menuItems.find(it => it.name === itemName);
+            if (!item || !item.sizes) return;
+            
+            const sizeSmall = document.getElementById('size-small');
+            const sizeMedium = document.getElementById('size-medium');
+            const sizeHigh = document.getElementById('size-high');
+            const priceEl = document.getElementById('desc-modal-price');
+            
+            let selectedPrice = item.price;
+            if (sizeSmall && sizeSmall.checked) {
+                selectedPrice = item.sizes['Small'];
+            } else if (sizeMedium && sizeMedium.checked) {
+                selectedPrice = item.sizes['Medium'];
+            } else if (sizeHigh && sizeHigh.checked) {
+                selectedPrice = item.sizes['High'];
+            }
+            
+            if (priceEl) {
+                priceEl.textContent = 'Rp.' + selectedPrice.toLocaleString('id-ID');
+            }
+        }
+
+        // Save cart ke localStorage
+        function saveCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        // Update cart count badge
+        function updateCartCount(){
+            const cart = loadCart();
+            const badge = document.getElementById('cart-count');
+            if(!badge) return;
+            const totalItems = cart.reduce((s,i)=>s + (i.quantity||0),0);
+            badge.textContent = totalItems;
+            badge.style.display = totalItems > 0 ? 'inline-block' : 'none';
+        }
+
+        // Add to cart
+        function addToCart(name, price, image) {
+            const cart = loadCart();
+
+            // Get temperature if it's a drink
+            let temperature = '';
+            const tempCold = document.getElementById('temp-cold');
+            const tempNormal = document.getElementById('temp-normal');
+            const tempHot = document.getElementById('temp-hot');
+
+            if (tempCold && tempCold.checked) {
+                temperature = 'Dingin';
+            } else if (tempNormal && tempNormal.checked) {
+                temperature = 'Biasa';
+            } else if (tempHot && tempHot.checked) {
+                temperature = 'Hangat';
+            }
+
+            // Get optional custom request/note from user
+            const noteEl = document.getElementById('desc-modal-note');
+            const noteFoodEl = document.getElementById('desc-modal-note-food');
+            const noteDrink = noteEl ? noteEl.value.trim() : '';
+            const noteFood = noteFoodEl ? noteFoodEl.value.trim() : '';
+            // prefer specific field depending on which is used
+            const note = noteDrink || noteFood || '';
+
+            // Get size if it's a food item (Burger/Pizza)
+            let size = '';
+            const sizeSmall = document.getElementById('size-small');
+            const sizeMedium = document.getElementById('size-medium');
+            const sizeHigh = document.getElementById('size-high');
+            if (sizeSmall && sizeSmall.checked) {
+                size = 'Small';
+            } else if (sizeMedium && sizeMedium.checked) {
+                size = 'Medium';
+            } else if (sizeHigh && sizeHigh.checked) {
+                size = 'High';
+            }
+
+            // Calculate final price based on size
+            let finalPrice = price;
+            if (size) {
+                const item = menuItems.find(it => it.name === name);
+                if (item && item.sizes && item.sizes[size]) {
+                    finalPrice = item.sizes[size];
+                }
+            }
+
+            // Check if item already exists with same temperature, size and same note
+            const existingItem = cart.find(item => item.name === name && (item.temperature || '') === (temperature || '') && (item.size || '') === (size || '') && (item.note || '') === (note || ''));
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: finalPrice,
+                    image: image,
+                    temperature: temperature,
+                    size: size,
+                    note: note,
+                    quantity: 1
+                });
+            }
+
+            saveCart(cart);
+            // update mini-cart if present
+            if(typeof renderMiniCart === 'function') renderMiniCart();
+            // show centered modal confirmation instead of alert
+            const addModal = document.getElementById('add-modal-menu');
+            const addMsg = document.getElementById('add-modal-menu-msg');
+            const descMsg = temperature ? ` (${temperature})` : '';
+            const sizeMsg = size ? ` ${size}` : '';
+            const noteMsg = note ? ` Permintaan: ${note}` : '';
+            if(addMsg) addMsg.textContent = `${name}${sizeMsg}${descMsg} ditambahkan ke pembelian!${noteMsg}`;
+            if(addModal) addModal.classList.add('active');
+
+            // Close description modal
+            const descModal = document.getElementById('desc-modal');
+            if (descModal) descModal.classList.remove('active');
+        }
+
+        // Render menu on page load
+        renderMenu();
+    </script>
+
+    <!-- Description modal -->
+    <div id="desc-modal" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="desc-modal-title" style="max-width: 500px;">
+            <img id="desc-modal-image" src="" alt="" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 16px;">
+            <h4 id="desc-modal-title" style="margin-bottom: 8px;">Item Name</h4>
+            <p id="desc-modal-price" style="font-weight: bold; color: var(--brown-dark); margin-bottom: 12px; font-size: 18px;">Rp. 0</p>
+            <p id="desc-modal-description" style="color: #555; margin-bottom: 12px; text-align: left; line-height: 1.6;">Description</p>
+            
+            <div style="background: #f5f5f5; padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+                <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px;">Komposisi:</p>
+                <p id="desc-modal-ingredients" style="color: #555; margin: 0; font-size: 13px; line-height: 1.5;">Ingredients</p>
+            </div>
+            
+            <div id="desc-modal-temp-container" style="display: none; background: #fff3e0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #ffe0b2;">
+                <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">Pengaturan Suhu:</p>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="radio" id="temp-cold" name="temperature" value="cold" checked>
+                        <span style="color: #555;">Dingin</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="radio" id="temp-normal" name="temperature" value="normal">
+                        <span style="color: #555;">Biasa</span>
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="radio" id="temp-hot" name="temperature" value="hot">
+                        <span style="color: #555;">Hangat</span>
+                    </label>
+                </div>
+                <div style="margin-top:12px;">
+                    <label style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px; display:block;">Tambah Permintaan (opsional):</label>
+                    <textarea id="desc-modal-note" rows="3" placeholder="Tuliskan permintaan tambahan (mis. lebih sedikit gula, tanpa krim, dsb.)" style="width:100%; padding:8px; border-radius:8px; border:1px solid #e6c89a; resize:vertical;"></textarea>
+                </div>
+            </div>
+            
+            <!-- Size selection for certain foods (Burger, Pizza) -->
+            <div id="desc-modal-size-container" style="display: none; background: #fff8f0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #f6d7b7;">
+                <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">📏 Pilih Ukuran:</p>
+                <div style="display:flex; flex-direction: column; gap:8px;">
+                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-small" name="size" value="small" checked><span style="color:#555;">Small</span></label>
+                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-medium" name="size" value="medium"><span style="color:#555;">Medium</span></label>
+                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-high" name="size" value="high"><span style="color:#555;">High</span></label>
+                </div>
+                <div style="margin-top:12px;">
+                    <label style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px; display:block;">Tambah Permintaan (opsional):</label>
+                    <textarea id="desc-modal-note-food" rows="3" placeholder="Tuliskan permintaan tambahan untuk makanan (mis. tanpa bawang, saus terpisah)" style="width:100%; padding:8px; border-radius:8px; border:1px solid #f1d7b0; resize:vertical;"></textarea>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-shop" id="desc-modal-add-btn">Tambah ke Keranjang</button>
+                <button class="btn btn-view" id="desc-modal-close-btn">Kembali</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add-to-cart modal -->
+    <div id="add-modal-menu" class="modal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="add-modal-menu-title">
+            <h4 id="add-modal-menu-title">Item Ditambahkan</h4>
+            <p id="add-modal-menu-msg">Item ditambahkan ke pembelian.</p>
+            <div class="modal-actions">
+                <a class="btn btn-shop" href="menu.html">Lanjut Belanja</a>
+                <button class="btn btn-view" id="menu-go-cart">Lihat Pembelian</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal buttons behavior
+        document.addEventListener('DOMContentLoaded', function(){
+            // Description modal close button
+            const descModal = document.getElementById('desc-modal');
+            const closeDescBtn = document.getElementById('desc-modal-close-btn');
+            
+            if (closeDescBtn) {
+                closeDescBtn.addEventListener('click', function() {
+                    if (descModal) descModal.classList.remove('active');
+                });
+            }
+            
+            // Close description modal when clicking outside
+            if (descModal) {
+                descModal.addEventListener('click', function(e) {
+                    if (e.target === descModal) descModal.classList.remove('active');
+                });
+            }
+
+            // Add event listeners to size radio buttons for price updates
+            const sizeRadios = document.querySelectorAll('input[name="size"]');
+            sizeRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Get the item name from the modal title
+                    const titleEl = document.getElementById('desc-modal-title');
+                    if (titleEl) {
+                        updateSizePrice(titleEl.textContent);
+                    }
+                });
+            });
+
+            const addModal = document.getElementById('add-modal-menu');
+            const goCart = document.getElementById('menu-go-cart');
+            if(goCart){
+                goCart.addEventListener('click', function(){
+                    if(addModal) addModal.classList.remove('active');
+                    window.location.href = 'transaksi.html';
+                });
+            }
+
+            // close modal when clicking outside content
+            if(addModal){
+                addModal.addEventListener('click', function(e){
+                    if(e.target === addModal) addModal.classList.remove('active');
+                });
+            }
+        });
+    </script>
+
+    <!-- Mini Cart (Floating) -->
+    <aside id="mini-cart" class="mini-cart" aria-live="polite">
+        <div class="mini-cart-header">Pembelian Saya</div>
+        <div class="mini-cart-items" id="mini-cart-items">
+            <!-- items injected here -->
+        </div>
+        <div class="mini-cart-footer">
+            <div class="total" id="mini-cart-total">Rp. 0</div>
+            <button class="mini-btn" id="mini-cart-view">Lihat Pembelian</button>
+        </div>
+    </aside>
+
+    <script>
+        // Render mini cart content
+        function renderMiniCart(){
+            const items = loadCart();
+            const container = document.getElementById('mini-cart-items');
+            const totalEl = document.getElementById('mini-cart-total');
+            if(!container || !totalEl) return;
+
+            if(items.length === 0){
+                container.innerHTML = '<div style="padding:12px;color:#666;text-align:center">Belum ada item</div>';
+                totalEl.textContent = 'Rp. 0';
+                return;
+            }
+
+            container.innerHTML = '';
+            let subtotal = 0;
+            items.forEach((it, idx) => {
+                const itemTotal = it.price * it.quantity;
+                subtotal += itemTotal;
+
+                const div = document.createElement('div');
+                div.className = 'mini-cart-item';
+                const metaParts = [];
+                if(it.size) metaParts.push(it.size);
+                if(it.temperature) metaParts.push(it.temperature);
+                const metaDisplay = metaParts.length ? ` (${metaParts.join(' · ')})` : '';
+                div.innerHTML = `
+                    <img src="${it.image}" alt="${it.name}">
+                    <div class="meta">
+                        <div class="name">${it.name}${metaDisplay}</div>
+                        <div class="price">${new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(it.price)} · x${it.quantity}</div>
+                        ${it.note ? `<div style="font-size:12px;color:#666;margin-top:6px">Permintaan: ${it.note}</div>` : ''}
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+                        <button style="background:transparent;border:none;color:#c33;cursor:pointer;font-weight:700" onclick="removeMiniItem(${idx})">Hapus</button>
+                        <div style="display:flex;gap:6px;align-items:center">
+                            <button style="background:#eee;border:none;padding:4px 8px;border-radius:6px;cursor:pointer" onclick="updateMiniQty(${idx}, -1)">-</button>
+                            <span style="font-weight:700">${it.quantity}</span>
+                            <button style="background:#eee;border:none;padding:4px 8px;border-radius:6px;cursor:pointer" onclick="updateMiniQty(${idx}, 1)">+</button>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(div);
+            });
+
+            totalEl.textContent = new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0}).format(subtotal);
+            // update badge count in navbar
+            if(typeof updateCartCount === 'function') updateCartCount();
+        }
+
+        function updateMiniQty(index, change){
+            const cart = loadCart();
+            if(!cart[index]) return;
+            cart[index].quantity += change;
+            if(cart[index].quantity <= 0) cart.splice(index,1);
+            saveCart(cart);
+            renderMiniCart();
+        }
+
+        function removeMiniItem(index){
+            const cart = loadCart();
+            if(!cart[index]) return;
+            cart.splice(index,1);
+            saveCart(cart);
+            renderMiniCart();
+        }
+
+        // Wire mini cart view button
+        document.addEventListener('DOMContentLoaded', function(){
+            const viewBtn = document.getElementById('mini-cart-view');
+            if(viewBtn){
+                viewBtn.addEventListener('click', ()=> window.location.href = 'transaksi.html');
+            }
+            renderMiniCart();
+
+            // cart toggle in navbar
+            const cartToggle = document.getElementById('cart-toggle');
+            const miniCart = document.getElementById('mini-cart');
+            if(cartToggle && miniCart){
+                cartToggle.addEventListener('click', function(e){
+                    e.stopPropagation();
+                    miniCart.classList.toggle('visible');
+                    // update count when opening
+                    if(miniCart.classList.contains('visible')) renderMiniCart();
+                });
+
+                // close when clicking outside
+                document.addEventListener('click', function(evt){
+                    if(!miniCart.contains(evt.target) && evt.target !== cartToggle){
+                        miniCart.classList.remove('visible');
+                    }
+                });
+            }
+
+            // ensure badge initialized
+            if(typeof updateCartCount === 'function') updateCartCount();
+        });
+    </script>
+    </body>
+    </html>
