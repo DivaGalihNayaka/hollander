@@ -496,22 +496,7 @@
                         'High': 60000
                     }
                 },
-                {
-                    name: 'Baseball Steak',
-                    price: 30000,
-                    image: 'Baseball Steak.jpg',
-                    category: 'Food',
-                    description: 'Steak tenderloin premium yang empuk. Dimasak sempurna dengan bumbu khas Hollander Coffee.',
-                    ingredients: 'Daging Tenderloin 180gr, Garam, Merica Hitam, Butter, Garlic, Rosemary, Thyme'
-                },
-                {
-                    name: 'Pasta',
-                    price: 40000,
-                    image: 'Spaghetti.jpg',
-                    category: 'Food',
-                    description: 'Spaghetti dengan saus pilihan (marinara atau carbonara). Al dente dan creamy, lezat di lidah.',
-                    ingredients: 'Spaghetti Premium, Saus Tomato, Basil Segar, Garlic, Olive Oil, Parmesan Cheese, Garam, Merica'
-                }
+               
         ];
 
         // Render menu items separated by category
@@ -764,7 +749,7 @@
             </div>
             
             <!-- Size selection for certain foods (Burger, Pizza) -->
-            <div id="desc-modal-size-container" style="display: none; background: #fff3e0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #ffe0b2;">
+            <div id="desc-modal-size-container" style="display: none; background: #fff3e0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #f6d7b7;">
                 <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">Pilihan Tersedia:</p>
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                     <label style="display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; padding: 12px; border: 2px solid #ddd; border-radius: 8px; background: white; transition: all 0.3s;">
@@ -785,7 +770,7 @@
                     <textarea id="desc-modal-note-food" rows="3" placeholder="Tuliskan permintaan tambahan untuk makanan (mis. tanpa bawang, saus terpisah)" style="width:100%; padding:8px; border-radius:8px; border:1px solid #f1d7b0; resize:vertical;"></textarea>
                 </div>
             </div>
-
+            
             <div class="modal-actions">
                 <button class="btn btn-shop" id="desc-modal-add-btn">Tambah ke Keranjang</button>
                 <button class="btn btn-view" id="desc-modal-close-btn">Kembali</button>
