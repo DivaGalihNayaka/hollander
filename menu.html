@@ -236,6 +236,15 @@
     /* Keep section heights consistent with home.html */
     .site-section { padding: 60px 50px; min-height: 320px }
 
+    /* Size box styling */
+    input[type="radio"][name="size"]:checked + span {
+        font-weight: bold;
+    }
+
+    input[type="radio"][name="size"] {
+        accent-color: #ff770f;
+    }
+
     /* ================= RESPONSIVE ================= */
     @media (max-width: 1024px) {
         .promo-container {
@@ -358,7 +367,7 @@
     <nav>
         <div class="logo">☕ Hollander Coffee</div>
         <ul>
-            <li><a href="home.html">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="#menu">Menu</a></li>
             <li><a href="#contact">Kontak</a></li>
             <li>
@@ -737,19 +746,15 @@
             </div>
             
             <div id="desc-modal-temp-container" style="display: none; background: #fff3e0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #ffe0b2;">
-                <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">Pengaturan Suhu:</p>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                        <input type="radio" id="temp-cold" name="temperature" value="cold" checked>
-                        <span style="color: #555;">Dingin</span>
+                <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">Pilihan Tersedia:</p>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <label style="display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; padding: 12px; border: 2px solid #ddd; border-radius: 8px; background: white; transition: all 0.3s;">
+                        <input type="radio" id="temp-cold" name="temperature" value="cold" checked style="cursor: pointer;">
+                        <span style="color: #555; font-weight: 500;">🧊 Iced</span>
                     </label>
-                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                        <input type="radio" id="temp-normal" name="temperature" value="normal">
-                        <span style="color: #555;">Biasa</span>
-                    </label>
-                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
-                        <input type="radio" id="temp-hot" name="temperature" value="hot">
-                        <span style="color: #555;">Hangat</span>
+                    <label style="display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; padding: 12px; border: 2px solid #ddd; border-radius: 8px; background: white; transition: all 0.3s;">
+                        <input type="radio" id="temp-hot" name="temperature" value="hot" style="cursor: pointer;">
+                        <span style="color: #555; font-weight: 500;">☕ Hot</span>
                     </label>
                 </div>
                 <div style="margin-top:12px;">
@@ -759,12 +764,21 @@
             </div>
             
             <!-- Size selection for certain foods (Burger, Pizza) -->
-            <div id="desc-modal-size-container" style="display: none; background: #fff8f0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #f6d7b7;">
-                <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">📏 Pilih Ukuran:</p>
-                <div style="display:flex; flex-direction: column; gap:8px;">
-                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-small" name="size" value="small" checked><span style="color:#555;">Small</span></label>
-                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-medium" name="size" value="medium"><span style="color:#555;">Medium</span></label>
-                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;"><input type="radio" id="size-high" name="size" value="high"><span style="color:#555;">High</span></label>
+            <div id="desc-modal-size-container" style="display: none; background: #fff3e0; padding: 12px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #f6d7b7;">
+                <p style="font-weight: bold; color: var(--brown-dark); margin-bottom: 10px; font-size: 14px;">Ukuran Cup:</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                    <label style="display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; padding: 12px; border: 2px solid #ddd; border-radius: 8px; background: white; transition: all 0.3s;">
+                        <input type="radio" id="size-small" name="size" value="small" checked style="cursor: pointer;">
+                        <span style="color: #555; font-weight: 500;">Kecil</span>
+                    </label>
+                    <label style="display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; padding: 12px; border: 2px solid #ddd; border-radius: 8px; background: white; transition: all 0.3s;">
+                        <input type="radio" id="size-medium" name="size" value="medium" style="cursor: pointer;">
+                        <span style="color: #555; font-weight: 500;">Sedang</span>
+                    </label>
+                    <label style="display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; padding: 12px; border: 2px solid #ddd; border-radius: 8px; background: white; transition: all 0.3s;">
+                        <input type="radio" id="size-high" name="size" value="high" style="cursor: pointer;">
+                        <span style="color: #555; font-weight: 500;">Besar</span>
+                    </label>
                 </div>
                 <div style="margin-top:12px;">
                     <label style="font-weight: bold; color: var(--brown-dark); margin-bottom: 6px; font-size: 14px; display:block;">Tambah Permintaan (opsional):</label>
@@ -815,10 +829,52 @@
             const sizeRadios = document.querySelectorAll('input[name="size"]');
             sizeRadios.forEach(radio => {
                 radio.addEventListener('change', function() {
-                    // Get the item name from the modal title
-                    const titleEl = document.getElementById('desc-modal-title');
-                    if (titleEl) {
-                        updateSizePrice(titleEl.textContent);
+                    // Update price when size changes
+                    const itemName = document.getElementById('desc-modal-title') ? document.getElementById('desc-modal-title').textContent : '';
+                    updateSizePrice(itemName);
+
+                    // Update box styling for selected size
+                    const sizeContainer = document.getElementById('desc-modal-size-container');
+                    if (sizeContainer) {
+                        const labels = sizeContainer.querySelectorAll('label');
+                        labels.forEach(label => {
+                            const radio = label.querySelector('input[type="radio"]');
+                            if (radio && radio.checked) {
+                                label.style.borderColor = '#ff770f';
+                                label.style.borderWidth = '2px';
+                                label.style.background = '#fff3e0';
+                                label.style.boxShadow = '0 0 0 3px rgba(255,119,15,0.1)';
+                            } else {
+                                label.style.borderColor = '#ddd';
+                                label.style.background = 'white';
+                                label.style.boxShadow = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Add event listeners to temperature radio buttons for styling
+            const tempRadios = document.querySelectorAll('input[name="temperature"]');
+            tempRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Update box styling for selected temperature
+                    const tempContainer = document.getElementById('desc-modal-temp-container');
+                    if (tempContainer) {
+                        const labels = tempContainer.querySelectorAll('label');
+                        labels.forEach(label => {
+                            const radio = label.querySelector('input[type="radio"]');
+                            if (radio && radio.checked) {
+                                label.style.borderColor = '#ff770f';
+                                label.style.borderWidth = '2px';
+                                label.style.background = '#fff3e0';
+                                label.style.boxShadow = '0 0 0 3px rgba(255,119,15,0.1)';
+                            } else {
+                                label.style.borderColor = '#ddd';
+                                label.style.background = 'white';
+                                label.style.boxShadow = 'none';
+                            }
+                        });
                     }
                 });
             });

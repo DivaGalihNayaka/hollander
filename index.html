@@ -248,6 +248,9 @@
             text-align: center;
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: inherit;
         }
 
         .recommendation-card:hover {
@@ -384,7 +387,7 @@
     <nav>
         <div class="logo">☕ Hollander Coffee</div>
         <ul>
-            <li><a href="home.html">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="menu.html">Menu</a></li>
             <li><a href="#contact">Kontak</a></li>
         </ul>
@@ -474,21 +477,21 @@
     <section class="recommendations" id="menu">
         <h2>Rekomendasi<br>Untukmu!</h2>
         <div class="recommendation-grid">
-            <div class="recommendation-card" onclick="addToCart('Espresso', 20000, 'https://images.unsplash.com/photo-1447933601403-0c6688bcf566?w=400')">
+            <a href="menu.html" class="recommendation-card">
                 <img src="Espresso.jpg" alt="Espresso">
                 <h3>Espresso</h3>
                 <p>Kopi pekat dengan aroma kuat dan rasa yang intens. Sempurna untuk Anda yang menyukai cita rasa kopi asli.</p>
-            </div>
-            <div class="recommendation-card" onclick="addToCart('Americano', 25000, 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400')">
+            </a>
+            <a href="menu.html" class="recommendation-card">
                 <img src="americano.jpg" alt="Americano">
                 <h3>Americano</h3>
                 <p>Espresso yang diencerkan dengan air panas. Memberikan rasa yang lebih ringan namun tetap kaya akan aroma kopi.</p>
-            </div>
-            <div class="recommendation-card" onclick="addToCart('Gula Aren', 30000, 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400')">
+            </a>
+            <a href="menu.html" class="recommendation-card">
                 <img src="gulaaren.jpg" alt="Gula Aren">
                 <h3>Gula Aren</h3>
                 <p>Kopi tradisional dengan tambahan gula aren khas Indonesia. Memberikan manisnya alami dan kehangatan yang sempurna.</p>
-            </div>
+            </a>
         </div>
     </section>
 
@@ -576,14 +579,6 @@
             alert(`${name} ditambahkan ke keranjang!`);
             window.location.href = 'transaksi.html';
         }
-
-        // Make recommendation cards clickable
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.recommendation-card');
-            cards.forEach(card => {
-                card.style.cursor = 'pointer';
-            });
-        });
     </script>
 </body>
 </html>
